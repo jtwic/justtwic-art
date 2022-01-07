@@ -1,0 +1,726 @@
+/*----------------------------------- COMPONENTS */
+@import "core/functions";
+@import "core/mixins";
+@import "core/vars";
+@import "core/scrolls";
+@import "core/fonts";
+@import "core/base";
+/*----------------------------------- COMPONENTS */
+@import "components/cursor";
+@import "components/console";
+
+%block {
+  display: flex;
+  flex-flow: row;
+
+  max-height: calc(100vh - 0.1px);
+
+  @-moz-document url-prefix() {
+    backdrop-filter: unset;
+    mix-blend-mode: screen;
+    background: rgba(#000, 0.4);
+    //filter: blur(10px);
+  }
+}
+
+%content {
+  display: flex;
+  flex-flow: column;
+  gap: $contentGutterX2;
+  flex: 1 1;
+
+  padding: $contentGutterX3 dv($contentGutterX3, 2) $contentGutterX3 0;
+
+  overflow: auto;
+  overflow-x: hidden;
+
+  transition: width .8s linear, padding-right 1s linear,
+  opacity 1s linear,
+  visibility 1.3s linear,
+  max-width 2.5s 0.1s linear;
+
+  @extend %scroll-small;
+
+  &:not(.--show) {
+    max-width: 0;
+    width: 0;
+
+    padding: 0;
+
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.--show {
+    max-width: 100vw;
+    width: 36vw;
+
+    & ~ .caption {
+      &:before {
+        content: none;
+      }
+    }
+  }
+
+  @include max-wide(desktop) {
+    &.--show {
+      width: 48vw;
+    }
+  }
+
+  @include max-wide(phonesLg) {
+    &.--show {
+      width: auto;
+    }
+  }
+}
+
+@include keyframes(side-left) {
+  0% {
+    opacity: 0;
+    transform: translate(-30vw, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0vw, 0);
+  }
+}
+
+@include keyframes(pic-sgadow) {
+  100% {
+    border: rem(10) solid $light;
+    box-shadow: $sh-card,
+    em(10) em(20) 0 0 $primary,
+    em(16) 0 0 em(8) #131e1d,
+    em(-23) em(-8) 0 0 $secondary,
+    em(-10) em(10) em(14) em(8) #0000004d,
+    em(19) em(-2) em(22) em(10) #00000059;
+  }
+}
+
+@include keyframes(pic-blur) {
+  100% {
+    filter: unset;
+  }
+}
+
+@include keyframes(show-block) {
+  0% {
+    opacity: 0;
+    transform: translate(0, 10%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: unset;
+  }
+}
+
+.layout {
+  display: flex;
+  flex: 1 1;
+
+  max-width: 100vw;
+  height: 100%;
+
+  overflow: hidden;
+
+  &__main {
+    display: flex;
+    flex-flow: column;
+
+    gap: $contentGutterX2;
+
+    padding: calc(#{$contentGutterX3} + 1.5vw) $contentGutterX3 $contentGutterX3;
+    margin-right: 10vw;
+
+    color: $light;
+  }
+
+  &__img, &__capts, &__desc {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__img {
+    display: inline-flex;
+    place-content: center center;
+
+    width: em(280);
+    height: em(280);
+
+    margin-bottom: $contentGutterX3;
+
+    font-size: .85vw;
+
+    border-radius: 50%;
+
+    transition: width .2s ease-out, height .2s ease-out;
+    overflow: hidden;
+
+    filter: blur(50px);
+
+    animation: side-left 1s both cubic-bezier(0, 1.08, .84, 1.13),
+    pic-sgadow 1s 2s forwards cubic-bezier(0, 6.48, .5, 1.54),
+    pic-blur 1s 1.9s both cubic-bezier(0, 1.08, .84, 1.13);
+
+    img {
+      object-fit: contain;
+
+      filter: blur(50px);
+      animation: pic-blur $transition-start-delay $transition-start-duration both cubic-bezier(0, 1.08, .84, 1.13);
+    }
+  }
+
+  &__capts {
+    animation: show-block ($transition-start-delay + 0.63) ($transition-start-duration + 0.63) both linear;
+  }
+
+  &__desc {
+    display: inline-flex;
+    flex-flow: column;
+
+    max-width: rem(580);
+    line-height: 1.44;
+
+    animation: show-block ($transition-start-delay + 1.33) ($transition-start-duration + 1.33) both linear;
+  }
+
+  &__links {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: rem(8);
+
+    margin: auto 0 $contentGutterX2;
+
+    filter: drop-shadow(2px 4px 6px black);
+    transform: scale(0) translateY(50vh);
+
+    animation: show-block ($transition-start-delay + 1.93) ($transition-start-duration + 1.93) both linear;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+
+    font-size: rem(18);
+    line-height: 1.5;
+    letter-spacing: rem(1.5);
+
+    &.--soc {
+      width: max-content;
+      color: $light;
+      letter-spacing: rem(2);
+
+      transition: transform 0.9s linear;
+
+      &:before {
+        position: absolute;
+        left: rem(-(8 + 20));
+
+        content: '→';
+
+        transform: translate(var(--link-before-tr, -10vw, 0));
+        opacity: var(--link-before-o, 0);
+
+        transition: transform 0.9s cubic-bezier(.17, .67, .35, 1.1), opacity .7s linear;
+      }
+
+      @include only-mouse {
+        &:hover {
+          --link-before-o: 1;
+          --link-before-tr: 0, 0;
+
+          text-shadow: $sh-text;
+
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+
+  &__asides {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+
+    display: grid;
+    grid-auto-flow: column dense;
+
+    width: auto;
+    max-width: fit-content;
+
+    color: $light;
+
+    //background: $light;
+    //backdrop-filter: invert(1);
+    //-webkit-backdrop-filter:invert(1);
+
+    //box-shadow: rem(-0) 0 rem(30) rem(-0) rgb(#000, 0.1);
+    box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.36);
+
+    max-height: 100vh;
+    //overflow-x: hidden;
+    user-select: none;
+
+    transition: max-width $transition-default;
+
+    &.--z-index {
+      z-index: 10;
+    }
+  }
+
+  @media (min-width: 680px) {
+    &__main {
+      min-width: rem(400);
+      max-width: rem(530);
+      margin-left: 4vw;
+    }
+  }
+
+  @include max-wide(desktop) {
+    &__img {
+      font-size: 1vw;
+    }
+  }
+
+  @include max-wide(laptop) {
+    &__img {
+      font-size: 1.5vw;
+    }
+  }
+
+  @media (max-width: 680px) {
+    &__img {
+      font-size: 2.1vw;
+    }
+  }
+}
+
+.caption {
+  margin: 0;
+
+  font-size: rem(42);
+  letter-spacing: -0.50px;
+
+  &.--2 {
+    font-size: rem(28);
+    font-weight: 500;
+  }
+
+  &.--3 {
+    font-size: rem(24);
+  }
+
+  &.--mode-v {
+    position: sticky;
+    top: 0;
+
+    display: inline-flex;
+    align-items: center;
+    order: -1;
+
+    width: rem(77);
+
+    padding: $contentGutterX3 0;
+
+    writing-mode: vertical-lr;
+
+    transition: all 0.55s linear;
+
+    overflow: hidden;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: var(--title-before-h, 0);
+
+      z-index: -1;
+
+      content: '';
+      background-color: $secondary;
+
+      transition: height 0.5s ease-out;
+    }
+
+    @include only-mouse {
+      &:hover {
+        --title-before-h: 100%;
+
+        color: $light;
+      }
+    }
+
+    @media (max-width: 480px) {
+      padding: $contentGutterX3 dv($contentGutterX2, 2);
+    }
+  }
+}
+
+.get {
+  position: relative;
+
+  width: max-content;
+
+  &:not(:hover) {
+    .get__win {
+      max-height: 0;
+      padding: 0;
+
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &__win {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    display: inline-flex;
+    flex-flow: column;
+    gap: rem(16);
+
+    padding: $contentGutter $contentGutter;
+
+    line-height: 1;
+
+    border-radius: rem(2);
+    background: $light;
+    box-shadow: 0 rem(10) rem(20) rem(0) rgba(0, 0, 0, 0.36);
+
+    transition: opacity .6s linear;
+
+    a {
+      margin: 0;
+
+      font-size: rem(14);
+      line-height: 1;
+      color: #000 !important;
+
+      &:before {
+        content: none !important;
+      }
+
+      @include only-mouse {
+        &:hover {
+          color: $primary !important;
+        }
+      }
+    }
+  }
+}
+
+.button {
+  display: inline-flex;
+
+  width: max-content;
+  padding: rem(10) rem(16);
+
+  color: #000;
+  line-height: 1;
+  font-size: rem(16);
+
+  border: none;
+  outline: none;
+  border-radius: rem(3);
+  background: $secondary;
+  box-shadow: rem(3) rem(3) rem(10) rem(-3) rgba(0, 0, 0, 0.26);
+
+  transition: background-color .3s linear;
+
+  &.--cl-dark {
+    color: $primary-dark;
+  }
+
+  @include only-mouse {
+    &:hover {
+      color: $light;
+      background-color: $secondary-dark;
+    }
+  }
+}
+
+.footer {
+  padding: rem(6) $contentGutterX3;
+
+  font-size: rem(12);
+  letter-spacing: 0.25vw;
+  white-space: nowrap;
+
+  color: $light;
+}
+
+.canvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  &.--circle {
+    z-index: -1;
+  }
+}
+
+.cases {
+  @extend %block;
+
+  backdrop-filter: invert(0.9) blur(5px);
+  box-shadow: rem(-0) 0 rem(30) rem(-0) rgb(#000, 0.1);
+
+  &__content {
+    @extend %content;
+
+    padding-right: $contentGutterX3;
+  }
+
+  &__item {
+    transition-timing-function: linear;
+
+    //a:not(:hover) {
+    //  & ~ .cases__img {
+    //
+    //    --pos-img-y: -100vh;
+    //
+    //    //height: 0;
+    //    opacity: 0;
+    //  }
+    //
+    //  & ~ .cases__detail {
+    //    opacity: 0;
+    //  }
+    //;
+    //
+    //  & ~ .cases {
+    //    opacity: 0;
+    //  }
+    //}
+  }
+
+  &__img, &__detail {
+    position: fixed;
+    top: 50%;
+    right: calc(100% + #{rem(122)});
+
+
+    width: 45vw;
+  }
+
+  &__detail {
+    display: flex;
+    flex-flow: column;
+    z-index: 0;
+
+    padding: $contentGutterX2;
+
+    //transform: translateX(var(--pos-desc-y, -50%));
+    background: linear-gradient(to top bottom, transparent $secondary);
+    transition: transform 0.5s, --pos-desc-y 0.5s, opacity 0.5s;
+
+  }
+
+  &__img {
+    z-index: -1;
+    height: 70vh;
+
+    transform: translateY(var(--pos-img-y, -50%));
+    transition: transform 0.5s, --pos-img-y 0.5s, opacity 0.5s;
+
+    filter: drop-shadow(rem(-10) 0 rem(10) rgba(0, 0, 0, 0.36));
+    background: red;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+
+      object-fit: cover;
+      object-position: center center;
+    }
+  }
+
+  &__desc {
+    display: inline-flex;
+    flex-flow: column;
+    gap: rem(12);
+    justify-content: flex-start;
+
+    font-size: rem(28);
+    color: $light;
+    text-shadow: $sh-text;
+
+    strong {
+      font-weight: 800;
+      font-size: rem(16);
+    }
+  }
+
+  &__tags {
+    display: inline-flex;
+    flex-flow: row wrap;
+    gap: dv($contentGutter, 2);
+    padding: $contentGutterX2 0;
+  }
+
+  &__tag {
+    padding: rem(5) rem(16);
+
+    font-size: rem(14);
+    white-space: nowrap;
+    //color: $light;
+
+    border-radius: rem(18);
+    background: $secondary;
+
+  }
+}
+
+.skills {
+  @extend %block;
+
+  backdrop-filter: invert(0.7) blur(5px);
+
+  &__content {
+    @extend %content;
+  }
+
+  &__label {
+    display: block;
+    vertical-align: center;
+
+    margin-bottom: rem(2);
+
+    font-weight: 600;
+    line-height: 1;
+
+    span {
+      font-size: rem(14);
+      font-weight: 400;
+    }
+  }
+
+  &__progress {
+
+    &[value] {
+      position: relative;
+
+      width: 100%;
+      height: 20px;
+
+      border: none;
+      background-color: transparent;
+      border-radius: 3px;
+      //box-shadow: 0 2px 3px rgba(0, 0, 0, .5) inset;
+
+      appearance: none;
+
+      &::-webkit-progress-bar {
+        border-radius: rem(2);
+        //box-shadow: 0 2px 3px rgba(0, 0, 0, .5) inset;
+        box-shadow: inset 0 0 0 1px $secondary;
+        background-color: rgba($primary, 0.0);
+      }
+
+      &::-webkit-progress-value {
+        position: relative;
+
+        border-radius: rem(2);
+        background: $secondary;
+        /* Let's animate this */
+        //animation: animate-stripes 5s linear infinite;
+      }
+
+      &::-webkit-progress-value:after {
+        /* Only webkit/blink browsers understand pseudo elements on pseudo classes. A rare phenomenon! */
+        content: '';
+        position: absolute;
+
+        width: 5px;
+        height: 5px;
+        top: 7px;
+        right: 7px;
+
+        background-color: white;
+        border-radius: 100%;
+      }
+
+      &::-moz-progress-bar {
+        /* Gradient background with Stripes */
+        background-image: -moz-linear-gradient(135deg,
+          transparent,
+          transparent 33%,
+          rgba(0, 0, 0, .1) 33%,
+          rgba(0, 0, 0, .1) 66%,
+          transparent 66%),
+        -moz-linear-gradient(top,
+            rgba(255, 255, 255, .25),
+            rgba(0, 0, 0, .2)),
+        -moz-linear-gradient(left, #09c, #f44);
+
+        background-size: 35px 20px, 100% 100%, 100% 100%;
+        border-radius: 3px;
+
+        /* Firefox doesn't support CSS3 keyframe animations on progress element. Hence, we did not include animate-stripes in this code block */
+      }
+    }
+
+    &__label {
+      position: relative;
+    }
+
+    &__label:after {
+      content: attr(data-value) '%';
+      position: absolute;
+      right: 0;
+    }
+
+    .progress-bar {
+      background-color: whiteSmoke;
+      border-radius: 3px;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, .5) inset;
+
+      /* Dimensions should be similar to the parent progress element. */
+      width: 100%;
+      height: 20px;
+    }
+
+    .progress-bar span {
+      background-color: royalblue;
+      border-radius: 3px;
+
+      display: block;
+      text-indent: -9999px;
+    }
+  }
+
+  @keyframes animate-stripes {
+    100% {
+      background-position: -100px 0;
+    }
+  }
+}
+
+.gm-m-t {
+  margin-top: $contentGutter;
+}
+
+.gm-m-y {
+  margin: $contentGutterX2 0;
+}
+
+.gm-drop-shadow {
+  filter: drop-shadow(2px 4px 6px rgba(#000, .6));
+}
+

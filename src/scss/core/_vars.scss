@@ -1,0 +1,60 @@
+//* Map size devices for media query
+$wideScreens: (
+  phonesSm: 340px,
+  phones: 480px,
+  phonesLg: 640px,
+  tablet: 768px,
+  laptop: 992px,
+  desktopSm: 1024px,
+  desktopMd: 1170px,
+  desktop: 1280px,
+  notebook: 1366px,
+  notebookLg: 1600px,
+  fullHD: 1800px,
+  retina: 2100px,
+  retina4k: 3656px,
+  retina5k: 5100px,
+  retina8k: 7600px
+);
+
+$contentGutter: rem(16) !default;
+$contentGutterX2: rem(24) !default;
+$contentGutterX3: rem(48) !default;
+$contentGutterX4: rem(96) !default;
+
+$primary: #ff5656;
+$primary-dark: #9D2323;
+$secondary: #00FFBC;
+$secondary-dark: #03b387;
+$light: #ffffff;
+
+//* transitions && animations
+$transition-default: 0.3s ease-in-out !default;
+$transition-border: border-color $transition-default !default;
+$transition-shadow: box-shadow $transition-default !default;
+
+$transition-start-delay: 1s;
+$transition-start-duration: 2s;
+
+$base-font-color: $secondary !default;
+$base-font-size-color: 16px !default;
+
+$font-family-primary: 'Montserrat', sans-serif;
+
+// * shadows
+$sh-card: 0 rem(-37) rem(80) rem(-20) rgba(0, 0, 0, 0.36);
+$sh-text: rem(0) rem(1) rem(0) rgba($light, 1);
+
+//* Scrolls
+$scroll-size: var(--scroll-size, rem(10));
+$scroll-border-radius: 0;
+$scroll-thumb-color: $secondary;
+$scroll-thumb-hover-color: $secondary-dark;
+$scroll-track-color:  $light;
+$scroll-track-line: inset 0 0 0 0px $scroll-track-color;
+
+//* Cursor
+$cursor-size: rem(30);
+$cursor-color: $secondary;
+$cursor-color-active: $primary-dark;
+
