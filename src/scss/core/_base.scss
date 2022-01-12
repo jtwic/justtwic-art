@@ -79,6 +79,10 @@ a {
   text-decoration: none;
 }
 
+mark {
+  background: unset;
+}
+
 *::selection {
   background-color: $secondary;
   color: $light;

@@ -1,0 +1,180 @@
+.skills {
+  @extend %block;
+
+  backdrop-filter: invert(0.7) blur(5px);
+  -webkit-backdrop-filter: invert(0.7) blur(5px);
+
+  &__content {
+    @extend %content;
+  }
+
+  &__label, &__tags {
+    display: inline-flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    &.--col {
+      flex-flow: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__label {
+    gap: rem(4);
+
+    margin-bottom: rem(8);
+
+    font-size: rem(18);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  &__tags {
+    gap: rem(8);
+
+    span {
+      padding: rem(2) rem(6);
+
+      font-size: rem(10);
+      font-weight: 500;
+      line-height: 1;
+
+      border-radius: rem(2);
+      background: $light;
+    }
+  }
+
+  &__progress {
+
+    &[value] {
+      position: relative;
+
+      width: 100%;
+      height: 20px;
+
+      border: none;
+      background-color: transparent;
+      border-radius: rem(3);
+      //box-shadow: 0 2px 3px rgba(0, 0, 0, .5) inset;
+
+      appearance: none;
+
+      &::-webkit-progress-bar {
+        border-radius: rem(2);
+        //box-shadow: 0 2px 3px rgba(0, 0, 0, .5) inset;
+        box-shadow: inset 0 0 0 1px $secondary;
+        background-color: rgba($primary, 0.0);
+      }
+
+      &::-webkit-progress-value {
+        position: relative;
+
+        border-radius: rem(2);
+        background: $secondary;
+        /* Let's animate this */
+        //animation: animate-stripes 5s linear infinite;
+      }
+
+      &::-webkit-progress-value:after {
+        /* Only webkit/blink browsers understand pseudo elements on pseudo classes. A rare phenomenon! */
+        content: '';
+        position: absolute;
+
+        width: 5px;
+        height: 5px;
+        top: 7px;
+        right: 7px;
+
+        background-color: white;
+        border-radius: 100%;
+      }
+
+      &::-moz-progress-bar {
+        /* Gradient background with Stripes */
+        background-image: -moz-linear-gradient(135deg,
+          transparent,
+          transparent 33%,
+          rgba(0, 0, 0, .1) 33%,
+          rgba(0, 0, 0, .1) 66%,
+          transparent 66%),
+        -moz-linear-gradient(top,
+            rgba(255, 255, 255, .25),
+            rgba(0, 0, 0, .2)),
+        -moz-linear-gradient(left, #09c, #f44);
+
+        background-size: 35px 20px, 100% 100%, 100% 100%;
+        border-radius: 3px;
+
+        /* Firefox doesn't support CSS3 keyframe animations on progress element. Hence, we did not include animate-stripes in this code block */
+      }
+    }
+
+    &__label {
+      position: relative;
+    }
+
+    &__label:after {
+      content: attr(data-value) '%';
+      position: absolute;
+      right: 0;
+    }
+
+    .progress-bar {
+      background-color: whiteSmoke;
+      border-radius: 3px;
+      box-shadow: 0 2px 3px rgba(0, 0, 0, .5) inset;
+
+      /* Dimensions should be similar to the parent progress element. */
+      width: 100%;
+      height: 20px;
+    }
+
+    .progress-bar span {
+      background-color: royalblue;
+      border-radius: 3px;
+
+      display: block;
+      text-indent: -9999px;
+    }
+  }
+
+  @keyframes animate-stripes {
+    100% {
+      background-position: -100px 0;
+    }
+  }
+}
+
+.actual {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    top: rem(-6);
+    right: rem(-6);
+    z-index: 1;
+
+    width: rem(10);
+    height: rem(10);
+
+    content: '';
+
+    border: rem(2) solid $light;
+    border-radius: 50%;
+
+    background: $primary;
+    box-shadow: var(--pulse-sh, 0 0 rem(10) rem(10)) $secondary, var(--pulse-sh-2, 0 0 rem(10) rem(10)) $secondary;
+
+    animation: pulse-actual 1s 2s both alternate linear;
+  }
+}
+
+@include keyframes(pulse-actual) {
+  0% {
+    --pulse-sh: 0 0 rem(10) rem(10);
+  }
+
+  100% {
+    --pulse-sh: 0 0 rem(110) rem(120);
+  }
+}

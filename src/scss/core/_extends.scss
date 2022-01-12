@@ -1,0 +1,65 @@
+
+%block {
+  display: flex;
+  flex-flow: row;
+
+  max-height: calc(100vh - 0.1px);
+
+  @-moz-document url-prefix() {
+    backdrop-filter: unset;
+    mix-blend-mode: screen;
+    background: rgba(#000, 0.4);
+  }
+}
+
+%content {
+  display: flex;
+  flex-flow: column;
+  gap: $contentGutterX2;
+  flex: 1 1;
+
+  padding: $contentGutterX3 dv($contentGutterX3, 2) $contentGutterX3 0;
+
+  overflow: auto;
+  overflow-x: hidden;
+
+  transition: width .8s linear, padding-right 1s linear,
+  opacity 1s linear,
+  visibility 1.3s linear,
+  max-width 2.5s 0.1s linear;
+
+  @extend %scroll-small;
+
+  &:not(.--show) {
+    max-width: 0;
+    width: 0;
+
+    padding: 0;
+
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.--show {
+    max-width: 100vw;
+    width: var(--content-width, 36vw);
+
+    & ~ .caption {
+      &:before {
+        content: none;
+      }
+    }
+  }
+
+  @include max-wide(desktop) {
+    &.--show {
+      width: var(--content-width-m-desktop, 48vw);
+    }
+  }
+
+  @include max-wide(phonesLg) {
+    &.--show {
+      width: var(--content-width-m-phonesLg, auto);
+    }
+  }
+}

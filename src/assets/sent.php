@@ -7,13 +7,12 @@
 
    $data  =  json_decode ( file_get_contents ( 'php://input' ),  true );
 
-//    $name    = $data['name'];
    $email   = $data['email'];
    $body    = $data['message'];
 
-   $subject_mail = "=?utf-8?B?".base64_encode("🔥 Заявка на обратную связь с JusttwicArt")."?=";
+   $subject_mail = "=?utf-8?B?".base64_encode("🔥 Заявка на обратную связь с justtwic.art")."?=";
 
-   $address =  "iilyadeveloper@gmail.com" //$data['hostMail'];  //"info@newsurrogacy.com";
+   $address =  "illyadeveloper@gmail.com";
 
    $message = '<html><body style="background-color:#89defa8c; padding: 28px 24px;">';
    $message .= '<h3 style="margin:0 0 20px; padding: 10px 24px; font-size:24px; letter-spacing:1px; line-height:1.4; background: white; color:#FF6A95; border-radius: 30px;">Информация о клиенте</h3>';
@@ -26,10 +25,7 @@
    $message .= "</body></html>";
 
 // $headers = "From: $email \r\n Reply-to: $email\r\n Content-type:text/html; charset = UTF-8\r\n";
-   $send = mail ($address, $subject_mail , $message,"From: $email\r\nReply-to: $email\r\nContent-type:text/html; charset = UTF-8\r\n");
-
-   echo "Сообщение отправлено успешно!" +  $email;
-   echo "Сообщение отправлено успешно!" +  $body;
+   $send = mail ($address, $subject_mail, $message,"From: $email\r\nReply-to: $email\r\nContent-type:text/html; charset = UTF-8\r\n");
 
 	if ($send) //проверяем, отправилось ли сообщение
 		echo "Сообщение отправлено успешно!";

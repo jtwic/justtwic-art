@@ -10,10 +10,11 @@
     "copy-files": "npm run copy-img & npm run copy-assets & npm run copy-data",
     "init": "npm run clean-dist && npm run copy-files",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "rm -rf dist && parcel src/index.html --open",
-    "build": "rm -rf dist && parcel build src/index.html",
+    "start": "npm run clean-dist && npm run copy-assets && parcel src/index.html --open",
+    "build": "npm run clean-dist  && npm run copy-assets && parcel build src/index.html",
     "build2": "parcel build index.html -d ./dist --no-minify"
   },
+  "browserslist": "> 5.5%, last 4 versions, not dead",
   "keywords": [],
   "author": "Pashchuk Ilya",
   "license": "ISC",
@@ -29,13 +30,5 @@
   },
   "dependencies": {
     "scss": "^0.2.4"
-  },
-  "staticFiles": {
-    "staticPath": [
-      {
-        "staticPath": "static-dev",
-        "env": "dev"
-      }
-    ]
   }
 }

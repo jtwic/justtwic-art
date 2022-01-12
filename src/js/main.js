@@ -1,4 +1,5 @@
 import '../scss/style.scss';
+import {PROJECTS_STORE} from "./cases.store"
 
 const CONFIG_PARTICLES = {
   "particles": {
@@ -204,112 +205,6 @@ const CONFIG_PARTICLES_CIRKELS = {
   }
 };
 const MAIL_REGULAR = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
-const ALL_PROJECT = [
-  {
-    name: 'New Hope', link: 'https://newsurrogacy.com/',
-    desc: 'New Hope - International Surrogacy Agency in Ukraine', img: 'img/cases/case_newhope.png',
-    tags: ['HTML5', 'CSS3', 'SCSS', 'BEM', 'Angular', 'TypeScript', 'JS', 'PHP', 'Animation CSS', 'Animation JS', 'Git', 'Figma'],
-    rating: 9, year: '2021'
-  },
-  /*  {
-      name: 'Vero | Insurance service', link: 'https://myvero.com/',
-      desc: '', img: '',
-      tags: ['HTML5', 'CSS3', 'SCSS', 'BEM', 'Angular', 'TypeScript', 'JS', 'Animation CSS', 'Animation JS', 'Git', 'Figma'],
-      rating: 10, year: '2020'
-    },
-    {
-      name: 'UNI-Prep Institute', link: 'http://uniprep.justtwic.art/',
-      desc: '', img: '',
-      tags: ['HTML5', 'CSS3', 'SCSS', 'BEM', 'JS', 'Gulp', 'Git', 'Figma'],
-      rating: 8, year: '2021'
-    },
-    {
-      name: 'Mic', link: 'http://mic.justtwic.art/',
-      desc: '', img: '',
-      tags: ['HTML5', 'CSS3', 'SCSS', 'JS', 'Gulp', 'Git', 'XD'],
-      rating: 6, year: '2020'
-    },
-    {
-      name: 'I Am Tustin', link: 'http://tustin.justtwic.art',
-      desc: '', img: '',
-      tags: ['HTML5', 'CSS3', 'SCSS', 'BEM', 'JS', 'Gulp', 'Git', 'Figma'],
-      rating: 7, year: '2018'
-    },
-    {
-      name: 'Muslim Tour', link: 'http://muslim-tour.justtwic.art',
-      desc: '', img: '',
-      tags: ['HTML5', 'CSS3', 'SCSS', 'BEM', 'JS', 'Gulp', 'Git', 'Zeplin', 'Sketch'],
-      rating: 7, year: '2019'
-    },
-    {
-      name: 'Hager', link: 'http://hager.justtwic.art',
-      desc: '', img: '', tags: ['', ''],
-      rating: 7, year: '2020'
-    },
-    {
-      name: 'SberCloud', link: 'https://sbercloud.ru',
-      desc: '', img: '', tags: ['', ''],
-      rating: 9, year: '2019'
-    },
-    {
-      name: 'Mainbox', link: 'https://mainbox.com',
-      desc: '', img: '', tags: ['', ''],
-      rating: 7, year: '2018'
-    },
-    {
-      name: 'Home Pro Launchpad', link: 'https://youtu.be/bcjsyx00Fto',
-      desc: '', img: '', tags: ['', ''],
-      rating: 8, year: '2019'
-    },
-    {
-      name: 'Shelfit', link: 'http://shelfit.justtwic.art',
-      desc: '', img: '', tags: ['', ''],
-      rating: 6, year: '2020'
-    },
-    {
-      name: 'Loanin Click', link: 'http://loaninclick.justtwic.art',
-      desc: '', img: '', tags: ['', ''],
-      rating: 6, year: '2019'
-    },
-    {
-      name: 'Adalysis', link: 'http://adalysis.justtwic.art',
-      desc: '', img: '', tags: ['', ''],
-      rating: 7, year: '2020'
-    },
-    {
-      name: 'Better APP', link: 'http://better.justtwic.art',
-      desc: '', img: '', tags: ['', ''],
-      rating: 6, year: '2020'
-    },
-    {
-      name: 'Plus karma', link: 'https://pluskarma.ru/',
-      desc: '', img: '', tags: ['', ''],
-      rating: 7, year: '2019'
-    },
-    {
-      name: 'Ucash', link: 'http://ucash.justtwic.art',
-      desc: '', img: '', tags: ['', ''],
-      rating: 1, year: '2020'
-    },
-    {
-      name: 'Mail Cz', link: 'https://my.mail.cz',
-      desc: '', img: '', tags: ['', ''],
-      rating: 6, year: '2017'
-    },
-    {
-      name: 'Concepto', link: 'https://concep.to',
-      desc: '', img: '', tags: ['', ''],
-      rating: 6, year: '2019'
-    },
-    {
-      name: 'Termevenezia', link: ' http://m.termevenezia.it/it/',
-      desc: '', img: '', tags: ['', ''],
-      rating: 5, year: '2019'
-    },*/
-  // {
-  //   name: '', link: ''
-  // },
-];
 
 const consoleWin = document.querySelector('.console');
 const consoleHead = document.querySelector('.console__head');
@@ -348,20 +243,64 @@ const mouseY = (event) => {
   return event.clientY
 };
 
+const casesHoverEvent = () => {
+  let casesPar = document.querySelectorAll('.cases__item');
+  let scrollTimeout;
+
+  let pos = 1;
+
+  const clearScroll = (img) => {
+    pos = 1;
+    img.scrollTo({top: 1, behavior: "smooth"});
+
+    clearTimeout(scrollTimeout);
+  }
+
+  casesPar.forEach((elm) => {
+    let
+      link = elm.querySelector('a'),
+      img = elm.querySelector('.cases__img');
+
+    const scrollElement = () => {
+      clearTimeout(scrollTimeout);
+
+      if (img.scrollTop <= img.scrollHeight - 1) {
+        pos = pos + 1.6;
+        img.scrollTo(0, pos);
+        scrollTimeout = setTimeout(scrollElement, 0);
+      }
+    }
+
+    link.addEventListener('mouseover', (event) => {
+      clearScroll(img);
+
+      setTimeout(scrollElement, 3500);
+    })
+
+    // link.addEventListener('mouseout', () => {
+    //   clearScroll(img);
+    // })
+  })
+}
+
 const createLink = (url, name, pic, desc, year, tags) => {
   const par = document.querySelector('.cases__content');
 
   let item = document.createElement('div');
   item.setAttribute('class', "cases__item");
 
+  let detail = document.createElement('article');
+  detail.setAttribute('class', "cases__detail");
+
   let picture = document.createElement('picture');
   picture.setAttribute('class', "cases__img");
 
   let img = document.createElement('img');
-  img.setAttribute('src', pic);
+  img.setAttribute('src', 'images/cases/' + pic);
+  img.setAttribute('loading', 'lazy');
 
-  let detail = document.createElement('article');
-  detail.setAttribute('class', "cases__detail");
+  let head = document.createElement('div');
+  head.setAttribute('class', "cases__head");
 
   let description = document.createElement('h2');
   description.setAttribute('class', "cases__desc");
@@ -373,8 +312,7 @@ const createLink = (url, name, pic, desc, year, tags) => {
   let link = document.createElement('a');
   link.setAttribute('href', url);
   link.setAttribute('target', '_blank');
-
-  link.classList.add('button');
+  link.classList.add('cases__link');
   link.innerHTML = name;
 
   let data = (parent) => {
@@ -387,9 +325,11 @@ const createLink = (url, name, pic, desc, year, tags) => {
   }
 
   par.appendChild(item).appendChild(link);
-  par.appendChild(item).appendChild(picture).appendChild(img);
-  par.appendChild(item).appendChild(detail).appendChild(description);
-  par.appendChild(item).appendChild(detail).appendChild(skillss);
+  par.appendChild(item)
+
+  par.appendChild(item).appendChild(detail).appendChild(picture).appendChild(img);
+  par.appendChild(item).appendChild(detail).appendChild(head).appendChild(description);
+  par.appendChild(item).appendChild(detail).appendChild(head).appendChild(skillss);
 
   data(skillss);
 }
@@ -458,7 +398,7 @@ const btnToggles = () => {
   const casesBtn = document.querySelector('.cases .caption');
 
   const hide = '--show';
-  const upPos = '--z-index';
+  const upPos = '--up';
 
   function chekAsidesPos() {
     (cases.classList.contains(hide) || skills.classList.contains(hide))
@@ -512,7 +452,7 @@ const particles = (map, config) => {
 
 const initParticles = () => {
   particles('canvas', CONFIG_PARTICLES);
-  particles('canvas-circles', CONFIG_PARTICLES_CIRKELS);
+  // particles('canvas-circles', CONFIG_PARTICLES_CIRKELS);
 
   return console.log('🚀 initial Particles');
 }
@@ -545,7 +485,7 @@ const goTo = (link) => {
   centerX = (screenWidth / 2) - (wg / 2);
   centerY = (screenHeight / 2) - (hg / 2);
 
-  let opt = `left=${centerX},top=${centerY}, width=${wg},height=${hg}, modal, notadress`
+  let opt = `left=${centerX},top=${centerY}, width=${wg},height=${hg}`
 
   window.event.preventDefault();
   window.open(link, '_blank', opt)
@@ -560,7 +500,7 @@ const cmd = {
     setConsole('✓ [last]', '', ' - open last project');
   },
   top: () => {
-    for (let arr of ALL_PROJECT) {
+    for (let arr of PROJECTS_STORE) {
       if (arr.rating >= 8) {
         goTo(arr.link);
       }
@@ -568,7 +508,7 @@ const cmd = {
     setConsole('✓ [top]', '', ' - open top projects');
   },
   all: () => {
-    for (let arr of ALL_PROJECT) {
+    for (let arr of PROJECTS_STORE) {
       goTo(arr.link);
     }
     setConsole('✓ [all]', '', ' - open all project');
@@ -785,9 +725,11 @@ const initConsole = () => {
 }
 
 const appendCasesLinks = () => {
-  for (let caseItem of ALL_PROJECT) {
+  for (let caseItem of PROJECTS_STORE) {
     createLink(caseItem.link, caseItem.name, caseItem.img, caseItem.desc, caseItem.year, caseItem.tags);
   }
+
+  casesHoverEvent();
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -797,136 +739,3 @@ window.addEventListener('DOMContentLoaded', (event) => {
   // initChangeCursor();
   initConsole();
 })
-
-
-// // Set Focus to Input
-// consoleArea.addEventListener('click', ()=>{
-//   consoleInput.blur();
-// })
-/*
-// Output Welcome message
-output('Original console design by Matt Cowley https://codepen.io/MattCowley/pen/jqBbdG/')
-output('')
-output('Welcome to example console program.')
-
-// User Commands
-function echo (...a) {
-  return a.join(' ')
-}
-echo.usage = "echo arg [arg ...]"
-echo.doc = "Echos to output whatever arguments are input"
-
-let cmds = {
-  echo,
-  clear,
-  help
-}
-
-/!*
- * * * * * * * * USER INTERFACE * * * * * * *
- *!/
-
-function clear () {
-  $("#outputs").html("")
-}
-
-clear.usage = "clear"
-clear.doc = "Clears the terminal screen"
-
-function help (cmd) {
-  if (cmd) {
-    let result = ""
-    let usage = cmds[cmd].usage
-    let doc = cmds[cmd].doc
-    result += (typeof usage === 'function') ? usage() : usage
-    result += "\n"
-    result += (typeof doc === 'function') ? doc() : doc
-    return result
-  } else {
-    let result = "**Commands:**\n\n"
-    print = Object.keys(cmds)
-    for (let p of print) {
-      result += "- " + p + "\n"
-    }
-    return result
-  }
-}
-help.usage = () => "help [command]"
-help.doc = () => "Without an argument, lists available commands. If used with an argument displays the usage & docs for the command."
-
-
-
-// Display input to Console
-function input() {
-  var cmd = $('.console-input').val()
-  $("#outputs").append("<div class='output-cmd'>" + cmd + "</div>")
-  $('.console-input').val("")
-  autosize.update($('textarea'))
-  $("html, body").animate({
-    scrollTop: $(document).height()
-  }, 300);
-  return cmd
-}
-
-// Output to Console
-function output(print) {
-  if (!window.md) {
-    window.md = window.markdownit({
-      linkify: true,
-      breaks: true
-    })
-  }
-  $("#outputs").append(window.md.render(print))
-  $(".console").scrollTop($('.console-inner').height());
-}
-
-// Break Value
-var newLine = "<br/> &nbsp;";
-
-autosize($('textarea'))
-
-var cmdHistory = []
-var cursor = -1
-
-// Get User Command
-$('.console-input').on('keydown', function(event) {
-  if (event.which === 38) {
-    // Up Arrow
-    cursor = Math.min(++cursor, cmdHistory.length - 1)
-    $('.console-input').val(cmdHistory[cursor])
-  } else if (event.which === 40) {
-    // Down Arrow
-    cursor = Math.max(--cursor, -1)
-    if (cursor === -1) {
-      $('.console-input').val('')
-    } else {
-      $('.console-input').val(cmdHistory[cursor])
-    }
-  } else if (event.which === 13) {
-    event.preventDefault();
-    cursor = -1
-    let text = input()
-    let args = getTokens(text)[0]
-    let cmd = args.shift().value
-    args = args.filter(x => x.type !== 'whitespace').map(x => x.value)
-    cmdHistory.unshift(text)
-    if (typeof cmds[cmd] === 'function') {
-      let result = cmds[cmd](...args)
-      if (result === void(0)) {
-        // output nothing
-      } else if (result instanceof Promise) {
-        result.then(output)
-      } else {
-        console.log(result)
-        output(result)
-      }
-    } else if (cmd.trim() === '') {
-      output('')
-    } else {
-      output("Command not found: `
-  " + cmd + "`")
-      output("Use 'help' for list of commands.")
-    }
-  }
-});
-*/

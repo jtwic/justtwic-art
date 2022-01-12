@@ -1,0 +1,230 @@
+//@property --cases-width {
+//  syntax: "<percentage>";
+//  initial-value: 0%;
+//  inherits: false;
+//}
+
+.cases {
+  @extend %block;
+
+  backdrop-filter: invert(0.9) blur(5px);
+  -webkit-backdrop-filter: invert(0.9) blur(5px);
+
+  box-shadow: rem(-0) 0 rem(30) rem(-0) rgb(#000, 0.1);
+
+  &__content {
+    @extend %content;
+
+    gap: $contentGutter;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    height: max-content;
+
+    @include min-wide(desktopMd) {
+      .cases__link:not(:hover) {
+        & + .cases__detail {
+          --pos-detail-y: -150vh;
+          --pos-head-y: 120vh;
+          --pos-head-o: 0;
+          --pos-year-y: 100%;
+
+          opacity: 0;
+        }
+      }
+    }
+  }
+
+  &__link {
+    position: relative;
+
+    min-width: rem(130);
+    width: 100%;
+
+    padding: 0 rem(0) rem(4);
+
+    font-size: rem(18);
+    letter-spacing: rem(-0.5);
+    font-weight: 700;
+    text-align: right;
+    color: $light;
+
+    border-radius: 0;
+    background: transparent;
+    border-bottom: rem(1) solid rgba($light, .4);
+    box-shadow: none;
+
+    opacity: .8;
+
+    transition: all .5s cubic-bezier(.17, .67, .83, .67);
+
+    &:before {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1;
+
+      width: var(--cases-line-width, 0);
+      height: rem(1);
+
+      content: '';
+
+      background: $secondary;
+
+      transition: inherit;
+      transition-property: width;
+    }
+
+    @include only-mouse {
+      &:hover {
+        --cases-line-width: 100%;
+        //--cases-line-opacity: 1;
+
+        color: $secondary;
+
+        opacity: 1;
+      }
+    }
+  }
+
+  &__detail {
+    position: fixed;
+    top: 50%;
+    //right: calc(100% + #{rem(122)});
+
+    right: calc(45vw + 6%);
+
+    display: flex;
+
+    width: 45vw;
+    height: 70vh;
+
+    //border: rem(3) solid $light;
+    border-radius: dv($contentGutter, 2);
+    filter: drop-shadow(rem(-10) 0 rem(10) rgba(0, 0, 0, 0.36));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    transform: translateY(var(--pos-detail-y, -50%));
+    transition: transform 0.9s 0.1s, opacity 0.9s;
+    transition-timing-function: cubic-bezier(0, .77, .36, 1);
+    will-change: transform, opacity;
+    overflow: hidden;
+
+    &:after {
+      position: absolute;
+      top: 30%;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+
+      content: '';
+
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 22%, rgba(148, 187, 233, 0) 100%);
+    }
+
+    @include only-touch {
+      display: none !important;
+    }
+
+    @include max-wide(desktopSm) {
+      display: none !important;
+    }
+  }
+
+  &__head {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-end;
+
+    width: 100%;
+    min-height: 100%;
+
+    padding: ($contentGutterX2*1.5);
+
+    background: linear-gradient(to top bottom, transparent $secondary);
+    transform: translateY(var(--pos-head-y, 0));
+    opacity: var(--pos-head-o, 1);
+
+    transition: transform 1.5s cubic-bezier(0, .77, .36, 1), opacity 2.5s linear;
+
+  }
+
+  &__img {
+    @include scroll-disappear;
+
+    overflow: auto;
+
+    img {
+      width: 100%;
+
+      object-fit: cover;
+      object-position: top center;
+    }
+  }
+
+  &__desc {
+    display: inline-flex;
+    flex-flow: column;
+    gap: rem(12);
+    justify-content: flex-start;
+
+    font-size: rem(24);
+    line-height: 1.23;
+    letter-spacing: rem(-0.5);
+    color: $light;
+    text-shadow: $sh-text;
+
+    strong {
+      position: fixed;
+      top: var(--pos-year-y, 20%);
+      right: 3%;
+      z-index: -1;
+
+      writing-mode: vertical-lr;
+      font-weight: 900;
+      font-size: 9vw;
+      letter-spacing: rem(10);
+      line-height: 1;
+      text-shadow: rem(1) rem(8) rem(11) rgba(0, 0, 0, 0.36);;
+      color: $light;
+      transform: rotate(180deg);
+      //background: linear-gradient(to top, $secondary-dark 10%, $secondary 100%);
+      //background-clip: text;
+      //-webkit-background-clip: text;
+      //-webkit-text-fill-color: transparent;
+      //filter: blur(3px);
+
+      opacity: var(--pos-head-o, 0.4);
+
+      transition: top 1.2s cubic-bezier(0, .08, .74, 1.09), opacity 1.3s linear;
+    }
+  }
+
+  &__tags {
+    display: inline-flex;
+    flex-flow: row wrap;
+    gap: dv($contentGutter, 2);
+
+    padding: $contentGutterX2 0 0;
+  }
+
+  &__tag {
+    padding: rem(4) rem(12);
+
+    font-size: rem(13);
+    white-space: nowrap;
+
+    border-radius: rem(18);
+    background: $secondary;
+
+  }
+}
