@@ -1,0 +1,354 @@
+.layout {
+  display: flex;
+  flex: 1 1;
+
+  max-width: 100vw;
+  height: 100%;
+
+  overflow: hidden;
+
+  &__main {
+    display: flex;
+    flex-flow: column;
+
+    gap: $contentGutterX2;
+
+    padding: calc(#{$contentGutterX3} + 1.5vw) $contentGutterX3 $contentGutterX3;
+    margin-right: 10vw;
+
+    color: $light;
+  }
+
+  &__img, &__capts, &__desc {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__img {
+    display: inline-flex;
+    place-content: center center;
+
+    width: em(280);
+    height: em(280);
+
+    margin-bottom: $contentGutterX3;
+
+    font-size: .85vw;
+
+    border-radius: 50%;
+
+    transition: width .2s ease-out, height .2s ease-out;
+    overflow: hidden;
+
+    filter: blur(50px);
+
+    animation: side-left 1s both cubic-bezier(0, 1.08, .84, 1.13),
+    pic-sgadow 1s 2s forwards cubic-bezier(0, 6.48, .5, 1.54),
+    pic-blur 1s 1.9s both cubic-bezier(0, 1.08, .84, 1.13);
+
+    img {
+      object-fit: contain;
+
+      filter: blur(50px);
+      animation: pic-blur $transition-start-delay $transition-start-duration both cubic-bezier(0, 1.08, .84, 1.13);
+    }
+  }
+
+  &__capts {
+    animation: show-block ($transition-start-delay + 0.63) ($transition-start-duration + 0.63) both linear;
+  }
+
+  &__desc {
+    z-index: 2;
+
+    display: inline-flex;
+    flex-flow: column;
+
+    max-width: rem(580);
+    line-height: 1.44;
+
+    animation: show-block ($transition-start-delay + 1.33) ($transition-start-duration + 1.33) both linear;
+  }
+
+  &__links {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: rem(8);
+
+    margin: auto 0 $contentGutterX2;
+
+    filter: drop-shadow(2px 4px 6px black);
+    transform: scale(0) translateY(50vh);
+
+    animation: show-block ($transition-start-delay + 1.93) ($transition-start-duration + 1.93) both linear;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+
+    font-size: rem(18);
+    line-height: 1.5;
+    letter-spacing: rem(1.5);
+
+    &.--soc {
+      width: max-content;
+      color: $light;
+      letter-spacing: rem(2);
+
+      transition: transform 0.9s linear;
+
+      &:before {
+        position: absolute;
+        left: rem(-(8 + 20));
+
+        content: '→';
+
+        transform: translate(var(--link-before-tr, -10vw, 0));
+        opacity: var(--link-before-o, 0);
+
+        transition: transform 0.9s cubic-bezier(.17, .67, .35, 1.1), opacity .7s linear;
+      }
+
+      @include only-mouse {
+        &:hover {
+          --link-before-o: 1;
+          --link-before-tr: 0, 0;
+
+          text-shadow: $sh-text;
+
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+
+  &__asides {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+
+    display: grid;
+    grid-auto-flow: column dense;
+
+    width: auto;
+    max-width: fit-content;
+    max-height: 100vh;
+
+    color: $light;
+
+    box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.36);
+
+    user-select: none;
+
+    transition: max-width $transition-default;
+
+    &.--up {
+      z-index: 10;
+    }
+  }
+
+  @media (min-width: 680px) {
+    &__main {
+      min-width: rem(400);
+      max-width: rem(530);
+      margin-left: 4vw;
+    }
+  }
+
+  @include max-wide(desktop) {
+    &__img {
+      font-size: 1vw;
+    }
+  }
+
+  @include max-wide(laptop) {
+    &__img {
+      font-size: 1.5vw;
+    }
+  }
+
+  @media (max-width: 680px) {
+    &__img {
+      font-size: 2.1vw;
+    }
+  }
+}
+
+.caption {
+  margin: 0;
+
+  font-size: rem(42);
+  letter-spacing: -0.50px;
+
+  &.--2 {
+    font-size: rem(28);
+    font-weight: 500;
+  }
+
+  &.--3 {
+    font-size: rem(24);
+  }
+
+  &.--mode-v {
+    position: sticky;
+    top: 0;
+
+    display: inline-flex;
+    align-items: center;
+    order: -1;
+
+    width: rem(77);
+
+    padding: $contentGutterX3 0;
+
+    writing-mode: vertical-lr;
+
+    transition: all 0.55s linear;
+
+    overflow: hidden;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: var(--title-before-h, 0);
+
+      z-index: -1;
+
+      content: '';
+      background-color: $secondary;
+
+      transition: height 0.5s ease-out;
+    }
+
+    @include only-mouse {
+      &:hover {
+        --title-before-h: 100%;
+
+        color: $light;
+      }
+    }
+
+    @media (max-width: 480px) {
+      padding: $contentGutterX3 dv($contentGutterX2, 2);
+    }
+  }
+}
+
+.get {
+  position: relative;
+  z-index: 100;
+
+  width: max-content;
+
+  &:not(:hover) {
+    .get__win {
+      max-height: 0;
+      padding: 0;
+
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  &__win {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    display: inline-flex;
+    flex-flow: column;
+    gap: rem(16);
+
+    padding: $contentGutter $contentGutter;
+
+    line-height: 1;
+
+    border-radius: rem(2);
+    background: $light;
+    box-shadow: 0 rem(10) rem(20) rem(0) rgba(0, 0, 0, 0.36);
+
+    transition: opacity .6s linear;
+
+    a {
+      margin: 0;
+
+      font-size: rem(13);
+      line-height: 1;
+      color: #000000;
+
+      &:before {
+        content: none !important;
+      }
+
+      @include only-mouse {
+        &:not(.--small):hover {
+          color: $primary !important;
+        }
+      }
+    }
+
+    .button.--small {
+      //width: 100%;
+      //margin: 0 0 (-$contentGutter);
+
+    }
+  }
+}
+
+.button {
+  display: inline-flex;
+
+  width: max-content;
+  padding: rem(10) rem(16);
+
+  color: #000;
+  line-height: 1;
+  font-size: rem(16);
+
+  border: none;
+  outline: none;
+  border-radius: rem(3);
+  background: $secondary;
+  box-shadow: rem(3) rem(3) rem(10) rem(-3) rgba(0, 0, 0, 0.26);
+
+  transition: background-color .3s linear;
+
+  &.--cl-dark {
+    color: $primary-dark;
+  }
+
+  &.--small {
+    padding: rem(6) rem(10);
+  }
+
+  @include only-mouse {
+    &:hover {
+      color: $light;
+      background-color: $secondary-dark !important;
+    }
+  }
+}
+
+.canvas {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  &.--circle {
+    z-index: -1;
+  }
+}

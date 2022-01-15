@@ -1,5 +1,4 @@
-import '../scss/style.scss';
-import {PROJECTS_STORE} from "./cases.store"
+import {PROJECTS_STORE} from "./cases.store";
 
 const CONFIG_PARTICLES = {
   "particles": {
@@ -209,6 +208,7 @@ const MAIL_REGULAR = /(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+
 const consoleWin = document.querySelector('.console');
 const consoleHead = document.querySelector('.console__head');
 const consoleArea = document.querySelector('.console__area');
+const consoleCanvas = document.querySelector('.console__canvas');
 const consoleElements = document.querySelector('.console__view');
 const consoleInput = document.querySelector('.console__cmd input');
 
@@ -223,7 +223,7 @@ const cmdErrs = {
   warnCommand: "command is undefined this console",
   sending: "email in progress...",
   sendingComplete: "email is success sending...",
-}
+};
 
 let storeCommand = [];
 let countClickUp = 0;
@@ -233,7 +233,7 @@ const checkElementInDom = (elm, func) => {
   if (typeof (elm) != 'undefined' && elm != null) {
     return func();
   }
-}
+};
 
 const mouseX = (event) => {
   return event.clientX
@@ -281,7 +281,7 @@ const casesHoverEvent = () => {
     //   clearScroll(img);
     // })
   })
-}
+};
 
 const createLink = (url, name, pic, desc, year, tags) => {
   const par = document.querySelector('.cases__content');
@@ -332,7 +332,7 @@ const createLink = (url, name, pic, desc, year, tags) => {
   par.appendChild(item).appendChild(detail).appendChild(head).appendChild(skillss);
 
   data(skillss);
-}
+};
 
 const positionElement = (event, elm) => {
   const cursor = document.getElementById('cursor');
@@ -345,7 +345,7 @@ const positionElement = (event, elm) => {
 
   elm.style.top = (mouse.y - cursorSize) + 'px'
   elm.style.left = (mouse.x - cursorSize) + 'px'
-}
+};
 
 const sendData = (data) => {
   const XHR = new XMLHttpRequest();
@@ -386,7 +386,7 @@ const sendData = (data) => {
 
   // Finally, send our data.
   XHR.send(data);
-}
+};
 
 const btnToggles = () => {
   const aside = document.querySelector('.layout__asides');
@@ -404,7 +404,7 @@ const btnToggles = () => {
     (cases.classList.contains(hide) || skills.classList.contains(hide))
       ? aside.classList.add(upPos)
       : aside.classList.remove(upPos)
-  }
+  };
 
   skillsBtn.addEventListener('click', () => {
     cases.classList.remove(hide);
@@ -419,7 +419,7 @@ const btnToggles = () => {
 
     chekAsidesPos();
   });
-}
+};
 
 const initChangeCursor = () => {
   let delayCursor = false;
@@ -448,7 +448,7 @@ const initChangeCursor = () => {
 
 const particles = (map, config) => {
   return particlesJS(map, config);
-}
+};
 
 const initParticles = () => {
   particles('canvas', CONFIG_PARTICLES);
@@ -472,7 +472,7 @@ const setConsole = (val, status = false, msg) => {
     consoleElements.appendChild(newElm);
     consoleArea.scrollBy(0, consoleArea.scrollHeight);
   }, 10);
-}
+};
 
 const goTo = (link) => {
   const screenWidth = window.screen.width;
@@ -570,7 +570,7 @@ const cmd = {
     consoleElements.innerHTML = '';
     consoleElements.innerHTML = html;
   }
-}
+};
 
 const setStoreCommand = (val) => {
   if (storeCommand.length > 20) {
@@ -579,7 +579,7 @@ const setStoreCommand = (val) => {
 
   storeCommand.unshift(val);
   return storeCommand
-}
+};
 
 const getStoreCommand = () => {
   if (storeCommand.length === -1) {
@@ -591,7 +591,7 @@ const getStoreCommand = () => {
   consoleInput.value = '';
   consoleInput.value = storeCommand[countClickUp];
   countClickUp = countClickUp + 1;
-}
+};
 
 const validateEmail = (email) => {
   return String(email).toLowerCase().match(MAIL_REGULAR);
@@ -600,7 +600,7 @@ const validateEmail = (email) => {
 const closeDragElement = () => {
   document.onmouseup = null;
   document.onmousemove = null;
-}
+};
 
 const consoleDrag = (elm) => {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -645,7 +645,7 @@ const consoleDrag = (elm) => {
       }
     }
   }
-}
+};
 
 const consoleFixedPosition = () => {
   let state = () => {
@@ -656,7 +656,74 @@ const consoleFixedPosition = () => {
   (consoleWin.classList.contains('--full') || consoleWin.classList.contains('--small'))
     ? state()
     : consoleDragTrigger = true
+};
+
+const consoleAnimation = () => {
+  //Canvas container
+  let p5div = document
+    .querySelector('#p5sketch');
+
+//Canvas size
+  let w, h;
+
+//P5.js sketch
+  let p5sketch = (p5) => {
+
+    p5.setup = () => {
+      w = p5div.clientWidth;
+      h = p5div.clientHeight;
+      p5.createCanvas(w, h);
+    };
+
+    p5.windowResized = () => {
+      w = p5div.clientWidth;
+      h = p5div.clientHeight;
+
+      p5.resizeCanvas(w, h);
+    }
+
+    let t1 = 0, t2 = 0, t3 = 0, t4 = 0;
+    let
+      dt1 = p5.random(0.01, 0.001),
+      dt2 = p5.random(0.02, 0.002),
+      dt3 = p5.random(0.03, 0.003),
+      dt4 = p5.random(0.04, 0.004);
+
+    let rnd = p5.random(10, 800),
+      wrnd = w / 2,
+      hrnd = h;
+
+    p5.draw = () => {
+      p5.clear();
+      p5.noFill();
+      p5.stroke("#101010");
+
+      // if(p5.frameCount%200==0){
+      //   rnd = p5.random(10, 80);
+      //   wrnd = p5.random(0, w);
+      //   hrnd = p5.random(0, h);
+      // }
+
+      for (let i = 1; i < 200; i++) {
+        p5.triangle(
+          wrnd, hrnd,
+          p5.abs(p5.sin(t1 + i * rnd)) * w,
+          p5.abs(p5.cos(t2 + i * rnd)) * h,
+          p5.abs(p5.sin(t3 + i * rnd)) * w,
+          p5.abs(p5.cos(t4 + i * rnd)) * h
+        );
+      }
+      // t1 += dt1;
+      t2 += dt2;
+      t3 += dt3;
+      t4 += dt4;
+    }
+  }
+
+//P5.js sketch instance
+  let p5inst = new p5(p5sketch, p5div);
 }
+
 const initConsole = () => {
   if (window.innerWidth <= 960) {
     return
@@ -722,7 +789,7 @@ const initConsole = () => {
   consoleDrag(consoleWin);
 
   return console.log('🚀 initial Console');
-}
+};
 
 const appendCasesLinks = () => {
   for (let caseItem of PROJECTS_STORE) {
@@ -730,7 +797,7 @@ const appendCasesLinks = () => {
   }
 
   casesHoverEvent();
-}
+};
 
 window.addEventListener('DOMContentLoaded', (event) => {
   initParticles();
@@ -738,4 +805,4 @@ window.addEventListener('DOMContentLoaded', (event) => {
   appendCasesLinks();
   // initChangeCursor();
   initConsole();
-})
+});

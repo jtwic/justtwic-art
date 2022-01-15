@@ -49,3 +49,18 @@
     transform: rotateY(180deg);
   }
 }
+
+
+
+//@property --pulse-sh {
+//  syntax: '<number>'; /* <- defined as type number for the transition to work */
+//  initial-value: 0;
+//  inherits: false;
+//}
+
+
+@include keyframes(pulse-actual) {
+  100% {
+    --pulse-sh: #{rem(20)};
+  }
+}

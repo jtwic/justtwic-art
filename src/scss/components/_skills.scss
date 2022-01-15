@@ -145,8 +145,20 @@
   }
 }
 
+@include keyframes(pulse-actual) {
+  50% {
+    //--pulse-delta: 1.2;
+    box-shadow:
+      0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
+      0 0 rem(16) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
+  }
+}
+
 .actual {
   position: relative;
+  --pulse-sh: #{rem(10)};
+  --pulse-sh-2: #{rem(10)};
+  --pulse-delta: 1;
 
   &:after {
     position: absolute;
@@ -163,18 +175,23 @@
     border-radius: 50%;
 
     background: $primary;
-    box-shadow: var(--pulse-sh, 0 0 rem(10) rem(10)) $secondary, var(--pulse-sh-2, 0 0 rem(10) rem(10)) $secondary;
+    //
+    //box-shadow: 0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
+    //0 0 rem(16) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
 
-    animation: pulse-actual 1s 2s both alternate linear;
-  }
-}
 
-@include keyframes(pulse-actual) {
-  0% {
-    --pulse-sh: 0 0 rem(10) rem(10);
-  }
+    //box-shadow: 0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
+    //0 0 rem(16) calc(var(--pulse-sh-2) + var(--pulse-delta)) $primary;
 
-  100% {
-    --pulse-sh: 0 0 rem(110) rem(120);
+
+    box-shadow:
+      0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
+      0 0 rem(16) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
+
+    transition: --pulse-delta 1s linear;
+
+    transform: scale(5);
+
+    animation: pulse-actual 1s infinite linear;
   }
 }

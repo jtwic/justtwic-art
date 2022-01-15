@@ -1,7 +1,16 @@
 {
   "name": "justtwic soon",
-  "version": "1.0.0",
   "description": "",
+  "version": "1.0.0",
+  "keywords": [],
+  "author": "Pashchuk Ilya",
+  "license": "ISC",
+  "source": "src/index.html",
+  "targets": {
+    "default": {
+      "distDir": "./dist"
+    }
+  },
   "scripts": {
     "clean-dist": "rm -rf dist && mkdir dist",
     "copy-img": "cp -vR src/assets/images ./dist",
@@ -14,21 +23,22 @@
     "build": "npm run clean-dist  && npm run copy-assets && parcel build src/index.html",
     "build2": "parcel build index.html -d ./dist --no-minify"
   },
-  "browserslist": "> 5.5%, last 4 versions, not dead",
-  "keywords": [],
-  "author": "Pashchuk Ilya",
-  "license": "ISC",
   "devDependencies": {
     "@parcel/resolver-glob": "^2.1.1",
     "@parcel/transformer-image": "^2.1.1",
     "@parcel/transformer-sass": "^2.1.1",
-    "autoprefixer": "^10.4.1",
-    "parcel": "^2.1.1",
+    "autoprefixer": "^10.4.2",
+    "cross-env": "^7.0.3",
+    "parcel": "latest",
     "parcel-plugin-static-files-copy": "^2.6.0",
     "postcss": "^8.4.5",
+    "posthtml-img-autosize": "^0.1.6",
+    "posthtml-include": "^1.7.2",
+    "posthtml-modules": "^0.8.0",
     "sass": "^1.46.0"
   },
   "dependencies": {
+    "cssnano": "^5.0.15",
     "scss": "^0.2.4"
   }
 }
