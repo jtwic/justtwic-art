@@ -15,8 +15,6 @@
 
     padding: calc(#{$contentGutterX3} + 1.5vw) $contentGutterX3 $contentGutterX3;
     margin-right: 10vw;
-
-    color: $light;
   }
 
   &__img, &__capts, &__desc {
@@ -140,10 +138,11 @@
     max-width: fit-content;
     max-height: 100vh;
 
-    color: $light;
+    background: var(--asides-bg, #6a0dc121);
+
+    backdrop-filter: var(--asides-filter-invert, invert(0.9)) blur(var(--asides-filter-blur, rem(5)));
 
     box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.36);
-
     user-select: none;
 
     transition: max-width $transition-default;
@@ -181,6 +180,8 @@
 }
 
 .caption {
+  justify-content: space-between;
+
   margin: 0;
 
   font-size: rem(42);
@@ -209,8 +210,6 @@
 
     writing-mode: vertical-lr;
 
-    transition: all 0.55s linear;
-
     overflow: hidden;
 
     &:before {
@@ -232,14 +231,28 @@
     @include only-mouse {
       &:hover {
         --title-before-h: 100%;
-
-        color: $light;
       }
     }
 
     @media (max-width: 480px) {
+      width: rem(46);
       padding: $contentGutterX3 dv($contentGutterX2, 2);
     }
+  }
+
+  &, mark, span {
+    display: flex;
+    align-items: center;
+  }
+
+  mark {
+    flex-flow: row nowrap;
+    font-size: rem(13);
+    letter-spacing: rem(5);
+    text-transform: uppercase;
+
+    opacity: var(--caption-mark-opacyty, 0);
+    transition: opacity $transition-default;
   }
 }
 
@@ -279,21 +292,24 @@
     transition: opacity .6s linear;
 
     a {
+      --link-color: #{$dark} !important;
+      --link-hover-color: #{$primary};
+
       margin: 0;
 
       font-size: rem(13);
       line-height: 1;
-      color: #000000;
 
       &:before {
         content: none !important;
       }
 
-      @include only-mouse {
-        &:not(.--small):hover {
-          color: $primary !important;
-        }
-      }
+      /*
+            @include only-mouse {
+              &:not(.--small):hover {
+                color: $primary !important;
+              }
+            }*/
     }
 
     .button.--small {
@@ -310,7 +326,7 @@
   width: max-content;
   padding: rem(10) rem(16);
 
-  color: #000;
+  color: $dark;
   line-height: 1;
   font-size: rem(16);
 

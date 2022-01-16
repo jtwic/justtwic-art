@@ -8,7 +8,7 @@
   @-moz-document url-prefix() {
     backdrop-filter: unset;
     mix-blend-mode: screen;
-    background: rgba(#000, 0.4);
+    background: rgba($dark, 0.4);
   }
 }
 
@@ -41,10 +41,13 @@
   }
 
   &.--show {
+
     max-width: 100vw;
     width: var(--content-width, 36vw);
 
     & ~ .caption {
+      --caption-mark-opacyty: 0.6;
+
       &:before {
         content: none;
       }
@@ -62,4 +65,26 @@
       width: var(--content-width-m-phonesLg, auto);
     }
   }
+}
+
+%line-round {
+  width: rem(10);
+  height: rem(10);
+
+  content: '';
+
+  border: rem(2) solid $light;
+  border-radius: 50%;
+  background: var(--line-round-color, $primary);
+
+  animation: pulse-actual 4s 0s infinite forwards linear; //cubic-bezier(.02, .66, .44, 1);
+}
+
+%dark-block {
+  border-radius: rem(8);
+  background: rgba($dark, .6);
+  backdrop-filter: blur(var(--dark-block-filter-blur, rem(5)));
+
+  box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.46);
+  overflow: hidden;
 }

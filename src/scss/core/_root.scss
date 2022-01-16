@@ -1,0 +1,9 @@
+:root {
+  @include generate-themes($themes-map);
+
+  @include use-theme-name(github) {
+    --asides-bg: #4e8ee2ad;
+    //--asides-filter-invert: #{invert(0.4)};
+  }
+
+}

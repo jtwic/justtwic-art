@@ -22,11 +22,78 @@ $contentGutterX2: rem(24) !default;
 $contentGutterX3: rem(48) !default;
 $contentGutterX4: rem(96) !default;
 
-$primary: #ff5656;
-$primary-dark: #9D2323;
-$secondary: #00FFBC;
-$secondary-dark: #03b387;
+$themes-map: (
+  default:(
+    primary: #ff5656,
+    primary-dark: #9D2323,
+    secondary: #00FFBC,
+    secondary-dark: #03b387,
+    tertiary: #f6d633,
+    light: #ffffff,
+    dark: #000000,
+    main: #ffffff,
+    border: #ffffff,
+    error: #ff5656,
+    warning: #fffb53,
+    success:#00FFBC
+  ),
+  light:(
+    primary: #22272e,
+    primary-dark: #373e47,
+    secondary: #99c8ff,
+    secondary-dark: #4e8ee2,
+    tertiary: #f6d633,
+    light: #adbac7,
+    dark: #0e1117,
+    main: #adbac7,
+    border: #ffffff,
+    error: #ff5656,
+    warning: #fffb53,
+    success:#00FFBC
+  ),
+  ocean:(
+    primary: #3673c9,
+    primary-dark: #134ea1,
+    secondary: #1de9b6,
+    secondary-dark: #0b5c49,
+    tertiary: #f38dad,
+    light: #7390aa,
+    dark: #222f34,
+    main: #7390aa,
+    border: #ffffff,
+    error: #d42a29,
+    warning: #cea860,
+    success:#00FFBC
+  ),
+  github:(
+    primary: #22272e,
+    primary-dark: #373e47,
+    secondary: #99c8ff,
+    secondary-dark: #4e8ee2,
+    tertiary: #e34c26,
+    light: #adbac7,
+    dark: #0e1117,
+    main: #adbac7,
+    border: #ffffff,
+    error: #ff7b72,
+    warning: #f1e05a,
+    success:#3eb950
+  )
+);
+
+$primary: var(--cl-primary);
+$primary-dark: var(--cl-primary-dark);
+$secondary: var(--cl-secondary);
+$secondary-dark: var(--cl-secondary-dark);
+$tertiary: var(--cl-tertiary);
+
 $light: #ffffff;
+$dark: #000000;
+
+$error: var(--cl-error);
+$warning: var(--cl-warning);
+$success: var(--cl-success);
+
 
 //* transitions && animations
 $transition-default: 0.3s ease-in-out !default;
@@ -46,11 +113,11 @@ $sh-card: 0 rem(-37) rem(80) rem(-20) rgba(0, 0, 0, 0.36);
 $sh-text: rem(0) rem(1) rem(0) rgba($light, 1);
 
 //* Scrolls
-$scroll-size: var(--scroll-size, rem(10));
+$scroll-size: var(--scroll-size, rem(5));
 $scroll-border-radius: 0;
 $scroll-thumb-color: $secondary;
 $scroll-thumb-hover-color: $secondary-dark;
-$scroll-track-color:  $light;
+$scroll-track-color: $light;
 $scroll-track-line: inset 0 0 0 0px $scroll-track-color;
 
 //* Cursor

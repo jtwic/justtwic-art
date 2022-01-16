@@ -1,9 +1,6 @@
 .skills {
   @extend %block;
 
-  backdrop-filter: invert(0.7) blur(5px);
-  -webkit-backdrop-filter: invert(0.7) blur(5px);
-
   &__content {
     @extend %content;
   }
@@ -31,6 +28,8 @@
 
   &__tags {
     gap: rem(8);
+
+    color: $dark;
 
     span {
       padding: rem(2) rem(6);
@@ -137,61 +136,37 @@
       text-indent: -9999px;
     }
   }
-
-  @keyframes animate-stripes {
-    100% {
-      background-position: -100px 0;
-    }
-  }
-}
-
-@include keyframes(pulse-actual) {
-  50% {
-    //--pulse-delta: 1.2;
-    box-shadow:
-      0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
-      0 0 rem(16) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
-  }
 }
 
 .actual {
-  position: relative;
-  --pulse-sh: #{rem(10)};
-  --pulse-sh-2: #{rem(10)};
+  --pulse-sh: #{rem(4)};
+  --pulse-sh-2: #{rem(1)};
   --pulse-delta: 1;
 
+  position: relative;
+
+  &.--large {
+    margin: $contentGutter 0 0;
+
+    transform: scale(2);
+
+    &:after {
+      position: static !important;
+      top: unset;
+      right: unset;
+
+      animation: unset;
+    }
+  }
+
   &:after {
+    @extend %line-round;
+
     position: absolute;
-    top: rem(-6);
-    right: rem(-6);
+    top: rem(-4);
+    right: rem(-4);
     z-index: 1;
 
-    width: rem(10);
-    height: rem(10);
-
     content: '';
-
-    border: rem(2) solid $light;
-    border-radius: 50%;
-
-    background: $primary;
-    //
-    //box-shadow: 0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
-    //0 0 rem(16) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
-
-
-    //box-shadow: 0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
-    //0 0 rem(16) calc(var(--pulse-sh-2) + var(--pulse-delta)) $primary;
-
-
-    box-shadow:
-      0 0 rem(8) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
-      0 0 rem(16) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
-
-    transition: --pulse-delta 1s linear;
-
-    transform: scale(5);
-
-    animation: pulse-actual 1s infinite linear;
   }
 }

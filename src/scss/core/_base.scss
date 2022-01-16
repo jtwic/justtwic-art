@@ -5,8 +5,6 @@
   padding: 0;
 
   box-sizing: border-box;
-
-  //cursor: none;
 }
 
 html {
@@ -16,13 +14,13 @@ html {
   text-align: left;
   line-height: normal;
   letter-spacing: normal;
+  color: var(--main-color, $light);
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 
   scroll-behavior: smooth;
-
 
   @media (max-width: 1160px) {
     font-size: 75%;
@@ -53,33 +51,23 @@ body {
   margin: 0;
   padding: 0;
 
-  //background: url("./img/color-bg.jpg") no-repeat center center / cover;
-  //background: $primary;
-
-  background: $primary; // radial-gradient(circle, rgba($primary, 1) 40%, rgba(#0a0d0f, 1) 200%);
-
-  //&:before {
-  //  position: absolute;
-  //  top: 0;
-  //  bottom: 0;
-  //  left: 0;
-  //  right: 0;
-  //
-  //  content: '';
-  //
-  //  background: transparent url("../img/color-bg.jpg") no-repeat center center /cover;
-  //  mix-blend-mode: multiply;
-  //  opacity: 0.3;
-  //  backdrop-filter: blur(22px);
-  //  filter: blur(22px);
-  //}
+  background: $primary;
 }
 
 a {
+  color: var(--link-color, currentColor);
+
   text-decoration: none;
+
+  @include only-mouse {
+    &:hover {
+      color: var(--link-hover-color, $secondary);
+    }
+  }
 }
 
 mark {
+  color: currentColor;
   background: unset;
 }
 

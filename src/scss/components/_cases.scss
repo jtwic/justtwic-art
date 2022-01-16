@@ -1,14 +1,7 @@
-//@property --cases-width {
-//  syntax: "<percentage>";
-//  initial-value: 0%;
-//  inherits: false;
-//}
-
 .cases {
-  @extend %block;
+  --line-round-color: #{$secondary};
 
-  backdrop-filter: invert(0.9) blur(5px);
-  -webkit-backdrop-filter: invert(0.9) blur(5px);
+  @extend %block;
 
   box-shadow: rem(-0) 0 rem(30) rem(-0) rgb(#000, 0.1);
 
@@ -23,7 +16,7 @@
     align-items: center;
     height: max-content;
 
-    @include min-wide(desktopMd) {
+    @include min-wide(desktopSm) {
       .cases__link:not(:hover) {
         & + .cases__detail {
           --pos-detail-y: -150vh;
@@ -49,7 +42,7 @@
     letter-spacing: rem(-0.5);
     font-weight: 700;
     text-align: right;
-    color: $light;
+    white-space: nowrap;
 
     border-radius: 0;
     background: transparent;
@@ -80,11 +73,31 @@
     @include only-mouse {
       &:hover {
         --cases-line-width: 100%;
-        //--cases-line-opacity: 1;
+        --case-link-opacity: 0.7;
 
         color: $secondary;
 
         opacity: 1;
+      }
+    }
+
+    @include min-wide(phonesLg) {
+      &:after {
+        position: absolute;
+        top: 50%;
+        left: $contentGutter;
+
+        display: inline-flex;
+        align-items: center;
+
+        font-size: rem(12);
+        font-weight: 800;
+        letter-spacing: rem(3);
+        content: attr(data-rating);
+
+        transform: translate(0, -50%);
+        transition: opacity $transition-default;
+        opacity: var(--case-link-opacity, 0);
       }
     }
   }
@@ -92,7 +105,7 @@
   &__detail {
     position: fixed;
     top: 50%;
-    //right: calc(100% + #{rem(122)});
+    z-index: 10;
 
     right: calc(45vw + 6%);
 
@@ -101,11 +114,9 @@
     width: 45vw;
     height: 70vh;
 
-    //border: rem(3) solid $light;
     border-radius: dv($contentGutter, 2);
     filter: drop-shadow(rem(-10) 0 rem(10) rgba(0, 0, 0, 0.36));
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
 
     transform: translateY(var(--pos-detail-y, -50%));
     transition: transform 0.9s 0.1s, opacity 0.9s;
@@ -180,7 +191,6 @@
     font-size: rem(24);
     line-height: 1.23;
     letter-spacing: rem(-0.5);
-    color: $light;
     text-shadow: $sh-text;
 
     strong {
@@ -195,7 +205,6 @@
       letter-spacing: rem(10);
       line-height: 1;
       text-shadow: rem(1) rem(8) rem(11) rgba(0, 0, 0, 0.36);;
-      color: $light;
       transform: rotate(180deg);
       //background: linear-gradient(to top, $secondary-dark 10%, $secondary 100%);
       //background-clip: text;
@@ -222,9 +231,9 @@
 
     font-size: rem(13);
     white-space: nowrap;
+    color: $dark;
 
     border-radius: rem(18);
     background: $secondary;
-
   }
 }

@@ -1,9 +1,9 @@
-
 .console {
+  @extend %dark-block;
+
   position: fixed;
   right: 10vw;
   bottom: 10vh;
-
   z-index: 3;
 
   display: flex;
@@ -11,14 +11,6 @@
 
   width: rem(550);
   height: rem(350);
-
-  border-radius: rem(8);
-  background: rgba(#000, .6);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
-  box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.46);
-  overflow: hidden;
 
   user-select: none;
 
@@ -76,7 +68,7 @@
 
     border-radius: rem(6) rem(6) 0 0;
     //border-bottom: 1px solid rgba($secondary, 0.5);;
-    background: rgba(#000, .6);
+    background: rgba($dark, .6);
 
     &-text {
       display: inline-flex;
@@ -102,7 +94,6 @@
           color: $secondary;
 
           font-weight: 700;
-          //font-size: rem(11);
           opacity: 1;
 
           animation: flip 3.5s 0.3s infinite forwards alternate-reverse linear;
@@ -135,11 +126,11 @@
   &__view {
     pre {
       &.--err {
-        color: $primary;
+        color: $error;
       }
 
       &.--war {
-        color: #fffb53;
+        color: $warning;
       }
     }
   }
@@ -172,6 +163,8 @@
   }
 
   &__btn {
+    position: relative;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -179,8 +172,6 @@
     width: rem(10);
     height: rem(10);
 
-
-    //color: $light;
     font-size: 60%;
     border-radius: 50%;
     line-height: 1;
@@ -188,12 +179,27 @@
     outline: none;
     background: $primary;
 
-    transition: transform $transition-default;
+    transform: scale(1.01);
+    transition: $transition-default;
+    transition-property: transform;
+
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      content: var(--cons, '×');
+      line-height: 1;
+
+      transform: translate(-50%, -50%);
+      transition: opacity $transition-default;
+      opacity: var(--console-btn-op, 0);
+    }
 
     &.--y {
       --cons: '−';
 
-      background: #D6B500;
+      background: $tertiary;
     }
 
     &.--g {
@@ -203,13 +209,24 @@
 
     @include only-mouse {
       &:hover {
+        --console-btn-op: 1;
 
-        &:before {
-          content: var(--cons, '×');
-        }
-
-        transform: scale(1.35);
+        transform: scale(1.30);
       }
     }
+  }
+
+  &__canvas {
+    position: absolute;
+    //top: auto;
+    right: 3vw;
+    bottom: 3vw;
+    //left: auto;
+    z-index: -1;
+
+    width: rem(230);
+    height: rem(230);
+
+    opacity: 0.08;
   }
 }

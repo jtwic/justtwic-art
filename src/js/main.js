@@ -283,7 +283,7 @@ const casesHoverEvent = () => {
   })
 };
 
-const createLink = (url, name, pic, desc, year, tags) => {
+const createLink = (url, name, pic, desc, year, tags, rate) => {
   const par = document.querySelector('.cases__content');
 
   let item = document.createElement('div');
@@ -294,6 +294,9 @@ const createLink = (url, name, pic, desc, year, tags) => {
 
   let picture = document.createElement('picture');
   picture.setAttribute('class', "cases__img");
+
+  let hours = document.createElement('hours');
+  hours.setAttribute('class', "cases__hours");
 
   let img = document.createElement('img');
   img.setAttribute('src', 'images/cases/' + pic);
@@ -312,6 +315,18 @@ const createLink = (url, name, pic, desc, year, tags) => {
   let link = document.createElement('a');
   link.setAttribute('href', url);
   link.setAttribute('target', '_blank');
+  // link.setAttribute('data-hours', '30h');
+  const setRating = (rt) => {
+    if (rt >= 8) {
+      return '★ ★ ★ ★ ★';
+    } else if (rt >= 6 && rt < 8) {
+      return '★ ★ ★ ★';
+    } else {
+      return '★ ★ ★ ';
+    }
+  }
+
+  link.setAttribute('data-rating', setRating(rate));
   link.classList.add('cases__link');
   link.innerHTML = name;
 
@@ -325,7 +340,7 @@ const createLink = (url, name, pic, desc, year, tags) => {
   }
 
   par.appendChild(item).appendChild(link);
-  par.appendChild(item)
+  // par.appendChild(item)
 
   par.appendChild(item).appendChild(detail).appendChild(picture).appendChild(img);
   par.appendChild(item).appendChild(detail).appendChild(head).appendChild(description);
@@ -403,7 +418,7 @@ const btnToggles = () => {
   function chekAsidesPos() {
     (cases.classList.contains(hide) || skills.classList.contains(hide))
       ? aside.classList.add(upPos)
-      : aside.classList.remove(upPos)
+      : setTimeout(() => aside.classList.remove(upPos), 1200)
   };
 
   skillsBtn.addEventListener('click', () => {
@@ -658,70 +673,76 @@ const consoleFixedPosition = () => {
     : consoleDragTrigger = true
 };
 
-const consoleAnimation = () => {
-  //Canvas container
-  let p5div = document
-    .querySelector('#p5sketch');
+const consoleAnimationInit = () => {
+  const consoleCanvas = document.querySelector('.console__canvas');
+  const CONFIG_TRIANGLE = {
+    lines: 200,
+    color: '#ffffff'
+  };
 
-//Canvas size
   let w, h;
 
-//P5.js sketch
-  let p5sketch = (p5) => {
+  let drawLines = (p5) => {
+    let color = CONFIG_TRIANGLE.color;
+    let count = CONFIG_TRIANGLE.lines;
 
     p5.setup = () => {
-      w = p5div.clientWidth;
-      h = p5div.clientHeight;
+      w = consoleCanvas.clientWidth;
+      h = consoleCanvas.clientHeight;
+
+
       p5.createCanvas(w, h);
     };
 
     p5.windowResized = () => {
-      w = p5div.clientWidth;
-      h = p5div.clientHeight;
+      w = consoleCanvas.clientWidth;
+      h = consoleCanvas.clientHeight;
 
       p5.resizeCanvas(w, h);
     }
 
-    let t1 = 0, t2 = 0, t3 = 0, t4 = 0;
+    let t1 = 0, t2 = 0, t3 = 0, t4 = 0, t5 = 0, t6 = 0;
     let
       dt1 = p5.random(0.01, 0.001),
       dt2 = p5.random(0.02, 0.002),
       dt3 = p5.random(0.03, 0.003),
       dt4 = p5.random(0.04, 0.004);
+    // dt5 = p5.random(0.05, 0.005);
+    // dt6 = p5.random(0.06, 0.006);
 
-    let rnd = p5.random(10, 800),
-      wrnd = w / 2,
-      hrnd = h;
+    let
+      rnd = p5.random(10, 800),
+      wR = p5.random(0.05, 0.005) + (w / 2),
+      hR = p5.random(0.05, 0.005) + (h / 2);
 
     p5.draw = () => {
       p5.clear();
       p5.noFill();
-      p5.stroke("#101010");
+      p5.stroke(color);
 
-      // if(p5.frameCount%200==0){
-      //   rnd = p5.random(10, 80);
-      //   wrnd = p5.random(0, w);
-      //   hrnd = p5.random(0, h);
-      // }
-
-      for (let i = 1; i < 200; i++) {
+      for (let i = 1; i < count; i++) {
         p5.triangle(
-          wrnd, hrnd,
+          // wrnd,
+          // hrnd,
           p5.abs(p5.sin(t1 + i * rnd)) * w,
           p5.abs(p5.cos(t2 + i * rnd)) * h,
           p5.abs(p5.sin(t3 + i * rnd)) * w,
-          p5.abs(p5.cos(t4 + i * rnd)) * h
+          p5.abs(p5.cos(t4 + i * rnd)) * h,
+          p5.abs(p5.cos(t5 + i * rnd)) * h,
+          p5.abs(p5.cos(t6 + i * rnd)) * h,
         );
       }
-      // t1 += dt1;
+      t1 += dt1;
       t2 += dt2;
       t3 += dt3;
       t4 += dt4;
+      t5 += wR;
+      t6 += hR;
     }
   }
 
-//P5.js sketch instance
-  let p5inst = new p5(p5sketch, p5div);
+  let lineAnimationInit = new p5(drawLines, consoleCanvas);
+  // return lineAnimationInit();
 }
 
 const initConsole = () => {
@@ -788,18 +809,20 @@ const initConsole = () => {
 
   consoleDrag(consoleWin);
 
+  consoleAnimationInit()
+
   return console.log('🚀 initial Console');
 };
 
 const appendCasesLinks = () => {
   for (let caseItem of PROJECTS_STORE) {
-    createLink(caseItem.link, caseItem.name, caseItem.img, caseItem.desc, caseItem.year, caseItem.tags);
+    createLink(caseItem.link, caseItem.name, caseItem.img, caseItem.desc, caseItem.year, caseItem.tags, caseItem.rating);
   }
 
   casesHoverEvent();
 };
 
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', (revent) => {
   initParticles();
   btnToggles();
   appendCasesLinks();

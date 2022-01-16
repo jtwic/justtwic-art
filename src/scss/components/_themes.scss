@@ -1,0 +1,125 @@
+$themes-w: rem(600);
+$themes-h: rem(300);
+
+.themes {
+  @extend %dark-block;
+
+  position: fixed;
+  top: calc(50% - (#{$themes-h} / 2));
+  left: calc(50% - (#{$themes-w} / 2));
+  z-index: 10;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: $contentGutterX2 rem(8);
+
+  grid-auto-rows: max-content auto;
+  grid-auto-columns: 1fr;
+
+  width: $themes-w;
+  height: $themes-h;
+
+  padding: $contentGutterX3;
+  overflow: unset;
+
+  border: rem(3) solid $light;
+
+  &:before {
+    position: absolute;
+    top: -50vh;
+    bottom: -50vh;
+    right: -50vw;
+    left: -50vw;
+    z-index: -1;
+
+    content: '';
+
+    background: rgba($dark, 0.5);
+  }
+
+  &__head {
+    grid-area: 1 / 4 span;
+
+    font-size: rem(20);
+  }
+
+  &__item {
+    height: rem(120);
+    grid-row: 2;
+
+    padding: $contentGutter;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-flow: row wrap;
+
+    font-size: rem(15);
+    font-weight: 600;
+    letter-spacing: 1;
+    border-radius: inherit;
+
+    border: rem(2) solid transparent;
+    box-shadow: inset 0 0 0 var(--themes-item-shadow-size, 0) var(--themes-item-shadow-color, transparent);
+    transform-origin: center;
+    transition: box-shadow $transition-default;
+    //background: unset;
+
+    span {
+      flex: 1 1 100%;
+
+      margin: 0 0 rem(8);
+
+      //text-align: left;
+    }
+
+    mark {
+      flex: 50%;
+      height: rem(20);
+
+      &:first-of-type {
+        background: $secondary;
+      }
+
+      &:last-of-type {
+        background: $secondary-dark;
+      }
+    }
+
+    &:nth-of-type(1) {
+
+    }
+
+    &:nth-of-type(2) {
+      color: $light;
+      border-color: currentColor;
+      background: $primary;
+    }
+
+    &:nth-of-type(3) {
+      color: #adbac7;
+
+      border-color: #373e47;;
+      background: #22272e;
+    }
+
+    &:nth-of-type(4) {
+      color: #adbac7;
+
+      border-color: #373e47;;
+      background: #22272e;
+    }
+
+    @include only-mouse {
+      &:hover {
+        --themes-item-shadow-size: #{rem(5)};
+        --themes-item-shadow-color: currentColor;
+
+      }
+    }
+
+
+  }
+
+
+}

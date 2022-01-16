@@ -1,0 +1,101 @@
+$available-width: rem(22);
+$available-value: 90%;
+
+.available {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  color: $light;
+
+  width: $available-width;
+
+  font-weight: 600;
+  font-size: rem(11);
+  writing-mode: vertical-rl;
+  letter-spacing: rem(0.1);
+  white-space: nowrap;
+
+  transform-origin: center;
+  transform: rotate(-180deg);
+  filter: drop-shadow(0 0 rem(4) rgba($dark, 0.1));
+
+  box-shadow: 0 rem(8) rem(20) rem(0) rgba($dark, 36%);
+
+  --show-block-trn-from: translate(0, 10%) rotate(-180deg);
+  --show-block-trn-to: translate(0%) rotate(-180deg);
+
+  animation: show-block ($transition-start-delay + 0.63) ($transition-start-duration + 0.63) both linear;
+
+
+  &:before, &:after {
+    position: absolute;
+    z-index: 1;
+
+    content: '';
+  }
+
+  &:before {
+    top: 0;
+    bottom: calc(100% - #{$available-value});;
+    left: 0;
+    right: 0;
+
+    border-radius: 0 0 $available-width $available-width;
+    background: linear-gradient(to top, $secondary, $secondary-dark);
+    opacity: .9;
+  }
+
+  &__item {
+    position: relative;
+    z-index: 1;
+
+    display: inherit;
+    align-items: center;
+    justify-content: center;
+
+    width: $available-width;
+    padding: rem(28) 0;
+    border-bottom: rem(1) solid $light;
+
+    &.--main {
+      //flex: 0 1;
+
+      height: max-content;
+      //flex: 1 1;
+      color: $dark;
+
+      border: none;
+      border-radius: 0 0 $available-width $available-width;
+      background: $light;
+
+      //&:after {
+      //  position: absolute;
+      //  right: dv($available-width, 2);
+      //  bottom: rem(-10);
+      //
+      //  width: $available-width;
+      //  height: $available-width;
+      //  content: '';
+      //  border-radius: rem(1);
+      //
+      //  transform-origin: center;
+      //  transform: rotate(45deg) translate(0, -50%);
+      //  background: $light;
+      //}
+    }
+
+    &.--30 {
+      flex: 20%;
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+}
