@@ -2,6 +2,9 @@ $available-width: rem(22);
 $available-value: 90%;
 
 .available {
+  --show-block-trn-from: translate(0, 10%) rotate(-180deg);
+  --show-block-trn-to: translate(0%) rotate(-180deg);
+
   position: fixed;
   top: 0;
   bottom: 0;
@@ -21,14 +24,11 @@ $available-value: 90%;
   letter-spacing: rem(0.1);
   white-space: nowrap;
 
+  box-shadow: 0 rem(8) rem(20) rem(0) $dark04;
+
   transform-origin: center;
   transform: rotate(-180deg);
-  filter: drop-shadow(0 0 rem(4) rgba($dark, 0.1));
-
-  box-shadow: 0 rem(8) rem(20) rem(0) rgba($dark, 36%);
-
-  --show-block-trn-from: translate(0, 10%) rotate(-180deg);
-  --show-block-trn-to: translate(0%) rotate(-180deg);
+  filter: drop-shadow(0 0 rem(4) $dark01);
 
   animation: show-block ($transition-start-delay + 0.63) ($transition-start-duration + 0.63) both linear;
 
@@ -61,33 +61,16 @@ $available-value: 90%;
 
     width: $available-width;
     padding: rem(28) 0;
-    border-bottom: rem(1) solid $light;
+    border-bottom: rem(1) solid $border-color04;
 
     &.--main {
-      //flex: 0 1;
-
       height: max-content;
-      //flex: 1 1;
-      color: $dark;
+
+      //color: $dark;
 
       border: none;
       border-radius: 0 0 $available-width $available-width;
       background: $light;
-
-      //&:after {
-      //  position: absolute;
-      //  right: dv($available-width, 2);
-      //  bottom: rem(-10);
-      //
-      //  width: $available-width;
-      //  height: $available-width;
-      //  content: '';
-      //  border-radius: rem(1);
-      //
-      //  transform-origin: center;
-      //  transform: rotate(45deg) translate(0, -50%);
-      //  background: $light;
-      //}
     }
 
     &.--30 {

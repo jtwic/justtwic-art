@@ -10,15 +10,15 @@
   }
 }
 
-@include keyframes(pic-sgadow) {
+@include keyframes(pic-shadow) {
   100% {
     border: rem(10) solid $light;
     box-shadow: $sh-card,
     em(10) em(20) 0 0 $primary,
     em(16) 0 0 em(8) #131e1d,
     em(-23) em(-8) 0 0 $secondary,
-    em(-10) em(10) em(14) em(8) #{$dark + '4d'},
-    em(19) em(-2) em(22) em(10)  #{$dark + '59'};
+    em(-10) em(10) em(14) em(8) #{'#000004d'},
+    em(19) em(-2) em(22) em(10)  #{'#0000059'};
   }
 }
 

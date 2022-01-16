@@ -22,7 +22,7 @@ $themes-h: rem(300);
   padding: $contentGutterX3;
   overflow: unset;
 
-  border: rem(3) solid $light;
+  border: rem(3) solid $border-color;
 
   &:before {
     position: absolute;
@@ -34,7 +34,7 @@ $themes-h: rem(300);
 
     content: '';
 
-    background: rgba($dark, 0.5);
+    background: $dark06;
   }
 
   &__head {

@@ -14,7 +14,7 @@ html {
   text-align: left;
   line-height: normal;
   letter-spacing: normal;
-  color: var(--main-color, $light);
+  color: $base-color ;
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

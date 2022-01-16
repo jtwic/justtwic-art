@@ -31,11 +31,15 @@ $themes-map: (
     tertiary: #f6d633,
     light: #ffffff,
     dark: #000000,
-    main: #ffffff,
+    dark-06: #{rgba(#000000, .6)},
+    dark-04: #{rgba(#000000, .4)},
+    dark-01: #{rgba(#000000, .1)},
+    base: #ffffff,
     border: #ffffff,
+    border-04: #{rgba(#ffffff, .4)},
     error: #ff5656,
     warning: #fffb53,
-    success:#00FFBC
+    success: #00FFBC
   ),
   light:(
     primary: #22272e,
@@ -45,8 +49,12 @@ $themes-map: (
     tertiary: #f6d633,
     light: #adbac7,
     dark: #0e1117,
-    main: #adbac7,
-    border: #ffffff,
+    dark-06: #{rgba(#0e1117, .6)},
+    dark-04: #{rgba(#0e1117, .4)},
+    dark-01: #{rgba(#0e1117, .1)},
+    base: #adbac7,
+    border: #adbac7,
+    border-04: #{rgba(#adbac7, .4)},
     error: #ff5656,
     warning: #fffb53,
     success:#00FFBC
@@ -59,8 +67,12 @@ $themes-map: (
     tertiary: #f38dad,
     light: #7390aa,
     dark: #222f34,
-    main: #7390aa,
-    border: #ffffff,
+    dark-06: #{rgba(#222f34, .6)},
+    dark-04: #{rgba(#222f34, .4)},
+    dark-01: #{rgba(#222f34, .1)},
+    base: #7390aa,
+    border: #7390aa,
+    border-04: #{rgba(#7390aa, .4)},
     error: #d42a29,
     warning: #cea860,
     success:#00FFBC
@@ -71,10 +83,14 @@ $themes-map: (
     secondary: #99c8ff,
     secondary-dark: #4e8ee2,
     tertiary: #e34c26,
-    light: #adbac7,
+    light: #c9d1d9,
     dark: #0e1117,
-    main: #adbac7,
-    border: #ffffff,
+    dark-06: #{rgba(#0e1117, .6)},
+    dark-04: #{rgba(#0e1117, .4)},
+    dark-01: #{rgba(#0e1117, .1)},
+    base: #c9d1d9,
+    border: #adbac7,
+    border-04: #{rgba(#adbac7, .4)},
     error: #ff7b72,
     warning: #f1e05a,
     success:#3eb950
@@ -87,13 +103,20 @@ $secondary: var(--cl-secondary);
 $secondary-dark: var(--cl-secondary-dark);
 $tertiary: var(--cl-tertiary);
 
-$light: #ffffff;
-$dark: #000000;
+$light: var(--cl-light);
+
+$dark: var(--cl-dark);
+$dark06: var(--cl-dark-06);
+$dark04: var(--cl-dark-04);
+$dark01: var(--cl-dark-01);
 
 $error: var(--cl-error);
 $warning: var(--cl-warning);
 $success: var(--cl-success);
 
+$base-color: var(--cl-base);
+$border-color: var(--cl-border);
+$border-color04: var(--cl-border-04);
 
 //* transitions && animations
 $transition-default: 0.3s ease-in-out !default;
@@ -110,7 +133,7 @@ $font-family-primary: 'Montserrat', sans-serif;
 
 // * shadows
 $sh-card: 0 rem(-37) rem(80) rem(-20) rgba(0, 0, 0, 0.36);
-$sh-text: rem(0) rem(1) rem(0) rgba($light, 1);
+$sh-text: rem(0) rem(1) rem(0) $light;
 
 //* Scrolls
 $scroll-size: var(--scroll-size, rem(5));

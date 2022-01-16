@@ -41,7 +41,7 @@
     filter: blur(50px);
 
     animation: side-left 1s both cubic-bezier(0, 1.08, .84, 1.13),
-    pic-sgadow 1s 2s forwards cubic-bezier(0, 6.48, .5, 1.54),
+    pic-shadow 1s 2s forwards cubic-bezier(0, 6.48, .5, 1.54),
     pic-blur 1s 1.9s both cubic-bezier(0, 1.08, .84, 1.13);
 
     img {
@@ -94,7 +94,6 @@
 
     &.--soc {
       width: max-content;
-      color: $light;
       letter-spacing: rem(2);
 
       transition: transform 0.9s linear;
@@ -303,19 +302,6 @@
       &:before {
         content: none !important;
       }
-
-      /*
-            @include only-mouse {
-              &:not(.--small):hover {
-                color: $primary !important;
-              }
-            }*/
-    }
-
-    .button.--small {
-      //width: 100%;
-      //margin: 0 0 (-$contentGutter);
-
     }
   }
 }

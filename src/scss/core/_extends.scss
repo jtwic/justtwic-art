@@ -8,7 +8,7 @@
   @-moz-document url-prefix() {
     backdrop-filter: unset;
     mix-blend-mode: screen;
-    background: rgba($dark, 0.4);
+    background: $dark04;
   }
 }
 
@@ -73,7 +73,7 @@
 
   content: '';
 
-  border: rem(2) solid $light;
+  border: rem(2) solid $border-color;
   border-radius: 50%;
   background: var(--line-round-color, $primary);
 
@@ -82,7 +82,7 @@
 
 %dark-block {
   border-radius: rem(8);
-  background: rgba($dark, .6);
+  background: $dark06;
   backdrop-filter: blur(var(--dark-block-filter-blur, rem(5)));
 
   box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.46);
