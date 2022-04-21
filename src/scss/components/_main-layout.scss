@@ -7,6 +7,7 @@
 
   overflow: hidden;
 
+
   &__main {
     display: flex;
     flex-flow: column;
@@ -14,7 +15,25 @@
     gap: $contentGutterX2;
 
     padding: calc(#{$contentGutterX3} + 1.5vw) $contentGutterX3 $contentGutterX3;
-    margin-right: 10vw;
+    //padding:  calc(#{$contentGutterX3} + 1.5vw) $contentGutterX3 $contentGutterX3 0;
+    //margin-right: 10vw;
+
+    //color: da;
+    //background: $light;
+  }
+
+  &__right {
+    position: relative;
+    z-index: 1000;
+
+    width: 100%;
+    height: 100%;
+
+    //padding: $contentGutterX3 $contentGutterX3 0;
+    color: $primary-dark;
+
+    overflow: auto;
+
   }
 
   &__img, &__capts, &__desc {
@@ -28,21 +47,30 @@
 
     width: em(280);
     height: em(280);
+    min-height: em(280);
 
     margin-bottom: $contentGutterX3;
 
     font-size: .85vw;
 
     border-radius: 50%;
-
+    background-color: $primary;
     transition: width .2s ease-out, height .2s ease-out;
     overflow: hidden;
 
-    filter: blur(50px);
+    filter: blur(rem(50));
 
     animation: side-left 1s both cubic-bezier(0, 1.08, .84, 1.13),
     pic-shadow 1s 2s forwards cubic-bezier(0, 6.48, .5, 1.54),
     pic-blur 1s 1.9s both cubic-bezier(0, 1.08, .84, 1.13);
+
+    //box-shadow: $sh-card,
+    //em(10) em(20) 0 0 $primary,
+    //em(16) 0 0 em(8) #131e1d,
+    //em(-23) em(-8) 0 0 $secondary,
+    //em(-10) em(10) em(14) em(8) #0000004d,
+    //em(19) em(-2) em(22) em(10) #00000059;
+    //
 
     img {
       object-fit: contain;
@@ -147,7 +175,7 @@
     transition: max-width $transition-default;
 
     &.--up {
-      z-index: 10;
+      z-index: 11;
     }
   }
 
@@ -155,7 +183,7 @@
     &__main {
       min-width: rem(400);
       max-width: rem(530);
-      margin-left: 4vw;
+      //margin-left: 4vw;
     }
   }
 
@@ -332,6 +360,12 @@
     padding: rem(6) rem(10);
   }
 
+  &.--large {
+    padding: rem(24) rem(32);
+
+    font-size: rem(24);
+  }
+
   @include only-mouse {
     &:hover {
       color: $light;
@@ -352,5 +386,85 @@
 
   &.--circle {
     z-index: -1;
+  }
+}
+
+.button-resize {
+  position: relative;
+
+  min-width: rem(66);
+  min-height: rem(66);
+
+  padding: rem(10);
+
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    width: 100%;
+    height: 100%;
+
+    content: '';
+
+    border-radius: 50%;
+    background: $primary;
+
+    transform: translate(var(--button-resize-transform, 100%, 100%));
+    opacity: var(--button-resize-opacity, 0);
+
+    transition: all 1s ease-in-out;
+  }
+
+  @include only-mouse {
+    &:hover {
+      --button-resize-transform: 0, 0;
+      --button-resize-opacity: 1;
+      --button-resize-fill: #{$light};
+      --button-resize-scale: 0.8;
+    }
+  }
+
+  svg {
+    path {
+      fill: var(--button-resize-fill, $dark);
+      transform: scale(var(--button-resize-scale, 1));
+      transform-origin: center;
+      transition: fill 1s ease-in-out, opacity .2s linear, transform .8s ease-out;
+
+      &:first-of-type {
+        opacity: var(--button-resize-full, 1);
+
+      }
+
+      &:last-of-type {
+        opacity: var(--button-resize-unfull, 0);
+      }
+    }
+  }
+
+
+  &.--unfull {
+    --button-resize-full: 0;
+    --button-resize-unfull: 1;
+  }
+}
+
+.input {
+  &__field {
+    @extend %field;
+  }
+
+}
+
+.textarea {
+  &__field {
+    @extend %field;
+
   }
 }

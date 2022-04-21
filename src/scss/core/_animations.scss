@@ -10,17 +10,6 @@
   }
 }
 
-@include keyframes(pic-shadow) {
-  100% {
-    border: rem(10) solid $light;
-    box-shadow: $sh-card,
-    em(10) em(20) 0 0 $primary,
-    em(16) 0 0 em(8) #131e1d,
-    em(-23) em(-8) 0 0 $secondary,
-    em(-10) em(10) em(14) em(8) #{'#000004d'},
-    em(19) em(-2) em(22) em(10)  #{'#0000059'};
-  }
-}
 
 @include keyframes(pic-blur) {
   100% {
@@ -51,14 +40,6 @@
   }
 }
 
-
-//@property --pulse-sh {
-//  syntax: '<number>'; /* <- defined as type number for the transition to work */
-//  initial-value: 0;
-//  inherits: false;
-//}
-
-
 @include keyframes(pulse-actual) {
   100% {
     --pulse-sh: #{rem(20)};
@@ -75,5 +56,18 @@
   50% {
     box-shadow: 0 0 rem(4) calc(var(--pulse-sh) * var(--pulse-delta)) $secondary,
     0 0 rem(8) calc(var(--pulse-sh-2) * var(--pulse-delta)) $primary;
+  }
+}
+
+@include keyframes(pic-shadow) {
+  100% {
+    border: rem(10) solid $light;
+
+    box-shadow: $sh-card,
+    em(10) em(20) 0 0 var(--pic-shadow-cl,$primary),
+    em(16) 0 0 em(8) var(--pic-shadow-cl-2,#131e1d),
+    em(-23) em(-8) 0 0 var(--pic-shadow-cl-3,$secondary),
+    em(-10) em(10) em(14) em(8) var(--pic-shadow-cl-4, #0000004d),
+    em(19) em(-2) em(22) em(10)var(--pic-shadow-cl-5, #00000059);
   }
 }

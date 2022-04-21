@@ -1,0 +1,36 @@
+.welcome {
+  display: flex;
+  align-items: center;
+
+  min-height: 88vh;
+
+  &__head {
+    @extend %sticky-block;
+  }
+
+  &__capt {
+    @extend %section-caption;
+  }
+
+
+  &__text {
+    position: relative;
+
+    font-size: rem(18);
+    line-height: 1.44;
+    letter-spacing: rem(-1);
+    color: $light;
+
+    &:before {
+      position: absolute;
+      top: 120%;
+      left: rem(-10);
+
+      width: 50%;
+
+      content: '';
+
+      border-bottom: rem(4) solid $light;
+    }
+  }
+}

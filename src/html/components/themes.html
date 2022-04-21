@@ -1,31 +1,38 @@
-<div class="themes">
-  <div class="themes__head">
-    Theme preferences
-    <span>
-      Choose how JustTwic looks to you.
-    </span>
-  </div>
-  <button class="themes__item">
-    <span>Light</span>
-    <mark></mark>
-    <mark></mark>
-  </button>
+<div class="themes --hide">
+  <button type="button" class="themes__close"></button>
 
-  <button class="themes__item">
-    <span>JustTwic</span>
-    <mark></mark>
-    <mark></mark>
-  </button>
+  <article class="themes__content">
+    <div class="themes__head">
+      Theme preferences
+      <span>Choose how justtwic looks to you.</span>
+    </div>
+    <button class="themes__item "data-theme="default">
+      <span>JustTwic</span>
+      <mark></mark>
+      <mark></mark>
+    </button>
 
-  <button class="themes__item">
-    <span>Ocean</span>
-    <mark></mark>
-    <mark></mark>
-  </button>
+    <button class="themes__item" data-theme="dark">
+      <span>dark</span>
+      <mark></mark>
+      <mark></mark>
+    </button>
 
-  <button class="themes__item">
-    <span>GitHub</span>
-    <mark></mark>
-    <mark></mark>
-  </button>
+    <button class="themes__item" data-theme="ocean">
+      <span>Ocean</span>
+      <mark></mark>
+      <mark></mark>
+    </button>
+
+    <button class="themes__item" data-theme="github">
+      <span>GitHub</span>
+      <mark></mark>
+      <mark></mark>
+    </button>
+
+    <mark class="themes__info">
+      To close, simply click outside the window.
+      <span class="actual"></span>
+    </mark>
+  </article>
 </div>

@@ -41,37 +41,37 @@ $themes-map: (
     warning: #fffb53,
     success: #00FFBC
   ),
-  light:(
-    primary: #22272e,
-    primary-dark: #373e47,
-    secondary: #99c8ff,
-    secondary-dark: #4e8ee2,
-    tertiary: #f6d633,
-    light: #adbac7,
-    dark: #0e1117,
-    dark-06: #{rgba(#0e1117, .6)},
-    dark-04: #{rgba(#0e1117, .4)},
-    dark-01: #{rgba(#0e1117, .1)},
-    base: #adbac7,
-    border: #adbac7,
-    border-04: #{rgba(#adbac7, .4)},
+  dark:(
+    primary: #000000,
+    primary-dark: #3e3e3e,
+    secondary: #ff3bb3,
+    secondary-dark: #ff4814,
+    tertiary: #ff4b21,
+    light: #ffffff,
+    dark: #000000,
+    dark-06: #0a0a0acc,
+    dark-04: #00000066,
+    dark-01: #0e11171a,
+    base: #ffffff,
+    border: #ffffff,
+    border-04: #fe1ca50a,
     error: #ff5656,
-    warning: #fffb53,
-    success:#00FFBC
+    warning: #fff900,
+    success:#31f507
   ),
   ocean:(
     primary: #3673c9,
     primary-dark: #134ea1,
     secondary: #1de9b6,
-    secondary-dark: #0b5c49,
+    secondary-dark: #25bf9b,
     tertiary: #f38dad,
-    light: #7390aa,
+    light: #e4eaf3,
     dark: #222f34,
     dark-06: #{rgba(#222f34, .6)},
     dark-04: #{rgba(#222f34, .4)},
     dark-01: #{rgba(#222f34, .1)},
-    base: #7390aa,
-    border: #7390aa,
+    base: #e4eaf3,
+    border: #e4eaf3,
     border-04: #{rgba(#7390aa, .4)},
     error: #d42a29,
     warning: #cea860,
@@ -119,7 +119,7 @@ $border-color: var(--cl-border);
 $border-color04: var(--cl-border-04);
 
 //* transitions && animations
-$transition-default: 0.3s ease-in-out !default;
+$transition-default: 0.3s linear !default;
 $transition-border: border-color $transition-default !default;
 $transition-shadow: box-shadow $transition-default !default;
 
@@ -132,8 +132,9 @@ $base-font-size-color: 16px !default;
 $font-family-primary: 'Montserrat', sans-serif;
 
 // * shadows
-$sh-card: 0 rem(-37) rem(80) rem(-20) rgba(0, 0, 0, 0.36);
+$sh-card: 0 rem(-37) rem(80) rem(-20) $dark04;
 $sh-text: rem(0) rem(1) rem(0) $light;
+$sh-text2: rem(0) rem(1) rem(7) $dark06;
 
 //* Scrolls
 $scroll-size: var(--scroll-size, rem(5));

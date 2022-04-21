@@ -225,7 +225,7 @@ const cmdErrs = {
   sendingComplete: "email is success sending...",
 };
 
-let storeCommand = [];
+let storeCommand = ['themes', 'last', 'top', 'all', 'cv', 'code', 'crf'];
 let countClickUp = 0;
 let consoleDragTrigger = false;
 
@@ -540,7 +540,6 @@ const cmd = {
     goTo('https://gb.ru/certificates/1289101.en');
     setConsole('✓ [code]', '', ' - my certificates are open');
   },
-  // cv:() => {},
   sent: (val) => {
     let ms = val.slice(4);
     let email = [];
@@ -572,18 +571,23 @@ const cmd = {
   help: () => {
     let html =
       'Welcome my friend 👋 is my simple console, you can perform:\n' +
-      '<pre>$ <b>last</b> - see my last completed project</pre>\n' +
-      '<pre>$ <b>top</b> - see the most worthy cases</pre>\n' +
-      '<pre>$ <b>all</b> - see all my successful cases</pre>\n' +
-      '<pre>$ <b>cv</b> - see my cv</pre>\n' +
-      '<pre>$ <b>code</b> - see my code examples</pre>\n' +
-      '<pre>$ <b>crf</b> - see my certificates</pre>\n' +
-      '<pre>$ <b>sent your@email "your message"</b> - send me a message</pre>\n' +
-      '<pre>$ <b>clear</b> - clear console</pre>\n' +
-      '<pre>$ <b>help</b> - info commands</pre>';
+      '<pre>  <b>last</b> - see my last completed project</pre>\n' +
+      '<pre>  <b>top</b> - see the most worthy cases</pre>\n' +
+      '<pre>  <b>all</b> - see all my successful cases</pre>\n' +
+      '<pre>  <b>cv</b> - see my cv</pre>\n' +
+      '<pre>  <b>code</b> - see my code examples</pre>\n' +
+      '<pre>  <b>crf</b> - see my certificates</pre>\n' +
+      '<pre>  <b>sent your@email "your message"</b> - send me a message</pre>\n' +
+      '<pre>  <b>themes</b> - open changes themes</pre>\n' +
+      '<pre>  <b>clear</b> - clear console</pre>\n' +
+      '<pre>  <b>help</b> - info commands</pre>';
 
     consoleElements.innerHTML = '';
     consoleElements.innerHTML = html;
+  },
+  themes: () => {
+    openThemes();
+    setConsole('✓ [themes]', '', ' - open changes themes');
   }
 };
 
@@ -597,7 +601,7 @@ const setStoreCommand = (val) => {
 };
 
 const getStoreCommand = () => {
-  if (storeCommand.length === -1) {
+  if (storeCommand.length === -1 && storeCommand === undefined) {
     return
   } else if (countClickUp >= storeCommand.length) {
     countClickUp = 0;
@@ -605,7 +609,7 @@ const getStoreCommand = () => {
 
   consoleInput.value = '';
   consoleInput.value = storeCommand[countClickUp];
-  countClickUp = countClickUp + 1;
+  countClickUp++;
 };
 
 const validateEmail = (email) => {
@@ -770,6 +774,7 @@ const initConsole = () => {
         else if (val === 'all') cmd.all()
         else if (val === 'code') cmd.code()
         else if (val === 'crf') cmd.crf()
+        else if (val === 'themes') cmd.themes()
         else if (val.slice(0, 4) === 'sent') cmd.sent(val)
         else setConsole('&#9888; [' + val + '] ', 'war', cmdErrs.warnCommand);
       }
@@ -780,6 +785,10 @@ const initConsole = () => {
 
     if (event.key === 'ArrowUp') {
       getStoreCommand()
+      let caretPos = event.target.selectionEnd;
+
+      event.preventDefault();
+      consoleInput.setSelectionRange(caretPos, caretPos)
     }
   })
 
@@ -822,10 +831,72 @@ const appendCasesLinks = () => {
   casesHoverEvent();
 };
 
-window.addEventListener('DOMContentLoaded', (revent) => {
-  initParticles();
-  btnToggles();
-  appendCasesLinks();
+const themes = document.querySelector('.themes');
+
+const openThemes = () => {
+  themes.classList.remove('--hide');
+}
+
+const closeThemes = () => {
+  themes.classList.add('--hide');
+}
+const initThemes = () => {
+  const html = document.querySelector('html');
+  const btn = document.querySelectorAll('.themes__item');
+  const btnClose = document.querySelector('.themes__close');
+  const localSess = window.sessionStorage;
+
+  let usedTm = html.getAttribute('theme');
+  let checkStorage = (localSess.getItem('usedThemes') == null);
+
+  if (checkStorage) {
+    setTimeout(() => {
+      localSess.setItem('usedThemes', usedTm);
+      openThemes()
+    }, 3800);
+  }
+
+  btn.forEach((elm) => {
+    let attr = elm.getAttribute('data-theme');
+    let isToggle = (attr === usedTm
+      || ((usedTm === "") && (attr === 'default'))
+      || ((usedTm === null) && (attr === 'default')));
+
+    isToggle ? elm.classList.add('--is-active')
+      : elm.classList.remove('--is-active');
+
+    elm.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      btn.forEach((i) => i.classList.remove('--is-active'));
+      elm.classList.add('--is-active');
+      html.setAttribute('theme', attr);
+      localSess.setItem('usedThemes', attr);
+    })
+  })
+
+  btnClose.addEventListener('click', (e) => {
+    closeThemes()
+  });
+}
+
+const initFullProjects = ()=> {
+  let btnFull = document.querySelector('.button-resize');
+  let projects = document.querySelector('.projects');
+
+  btnFull.addEventListener('click', ()=>{
+    console.log('btnFull', btnFull);
+    btnFull.classList.toggle('--unfull');
+    projects.classList.toggle('--full');
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  // initParticles();
+  initFullProjects(); // appendCasesLinks();
   // initChangeCursor();
-  initConsole();
+  // initConsole();
+  // initThemes();
 });
+
+

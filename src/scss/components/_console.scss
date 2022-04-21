@@ -13,7 +13,7 @@
   height: rem(350);
 
   user-select: none;
-
+  border: var(--console-border, none);
   transform: translate(0%, 0%) scale(1); // translate(100%, 120%) scale(1);
 
   transition: 1s .5s cubic-bezier(0, 1.18, .41, 1.26);
@@ -68,6 +68,7 @@
 
     border-radius: rem(6) rem(6) 0 0;
     //border-bottom: 1px solid rgba($secondary, 0.5);;
+    border-bottom: var(--console-border, none);
     background: $dark06;
 
     &-text {
@@ -125,6 +126,7 @@
 
   &__view {
     pre {
+
       &.--err {
         color: $error;
       }
@@ -145,7 +147,7 @@
       white-space: nowrap;
       content: 'you@justtwic.art $';
       font-size: rem(10);
-      color: $primary;
+      color: var(--console-prefix-color, $primary);
     }
 
     input {
@@ -177,7 +179,7 @@
     line-height: 1;
     border: none;
     outline: none;
-    background: $primary;
+    background: var(--console-btn-bg, $primary);
 
     transform: scale(1.01);
     transition: $transition-default;
@@ -199,12 +201,12 @@
     &.--y {
       --cons: '−';
 
-      background: $tertiary;
+      background: var(--console-btn-bg-2, $tertiary);
     }
 
     &.--g {
       --cons: '≡';
-      background: $secondary;
+      background: var(--console-btn-bg-3, $secondary);
     }
 
     @include only-mouse {

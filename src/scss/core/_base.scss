@@ -5,6 +5,9 @@
   padding: 0;
 
   box-sizing: border-box;
+
+  transition: $transition-default;
+  transition-property: color, background-color;
 }
 
 html {
@@ -14,7 +17,7 @@ html {
   text-align: left;
   line-height: normal;
   letter-spacing: normal;
-  color: $base-color ;
+  color: $base-color;
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -40,8 +43,6 @@ html {
 }
 
 body {
-  position: absolute;
-
   display: flex;
   flex-flow: column;
 
@@ -51,13 +52,15 @@ body {
   margin: 0;
   padding: 0;
 
-  background: $primary;
+  background: var(--main-bg, $primary);
 }
 
 a {
   color: var(--link-color, currentColor);
 
   text-decoration: none;
+
+  user-select: none;
 
   @include only-mouse {
     &:hover {
