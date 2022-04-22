@@ -1,11 +1,13 @@
 .welcome {
   display: flex;
-  align-items: center;
+  flex-flow: column;
+  justify-content: center;
 
   min-height: 88vh;
 
   &__head {
     @extend %sticky-block;
+    z-index: 1;
   }
 
   &__capt {
@@ -16,6 +18,10 @@
   &__text {
     position: relative;
 
+    max-width: rem(390);
+
+    padding:  0 $contentGutterX3;
+
     font-size: rem(18);
     line-height: 1.44;
     letter-spacing: rem(-1);
@@ -23,10 +29,10 @@
 
     &:before {
       position: absolute;
-      top: 120%;
+      bottom: 0%;
       left: rem(-10);
 
-      width: 50%;
+      width: 30%;
 
       content: '';
 
