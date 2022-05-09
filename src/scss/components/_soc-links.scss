@@ -1,0 +1,51 @@
+.soc-links {
+  position: fixed;
+  top: 50%;
+  left: $contentGutterX2;
+  z-index: z-index(header);
+
+  display: inline-grid;
+  justify-content: center;
+
+  //gap: rem(28);
+  font-family: $icon-font-family;
+
+  margin: auto 0 $contentGutterX2;
+
+  filter: drop-shadow(rem(2) rem(4) rem(6) $dark01);
+  transform: translateY(-60%) !important;
+
+  //animation: show-block ($transition-start-delay + 1.93) ($transition-start-duration + 1.93) both linear;
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+
+    padding: $contentGutter 0;
+
+    font-size: rem(32);
+    line-height: 1.5;
+    letter-spacing: rem(1.5);
+
+    opacity: var(--soc-links-link-opacity, 0.8);
+
+    transition: $transition-default;
+    transition-property: opacity, transform;
+
+    transform: scale(var(--soc-links-link-scale, 1));
+    transform-origin: center;
+  }
+
+  @include only-mouse {
+
+    &:hover {
+      --soc-links-link-opacity: 0.5;
+      --soc-links-link-scale: 0.8;
+    }
+
+    .soc-links__link:hover {
+      --soc-links-link-opacity: 1;
+      --soc-links-link-scale: 1.3;
+    }
+  }
+}

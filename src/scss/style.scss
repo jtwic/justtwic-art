@@ -9,8 +9,15 @@
 @import "core/gm";
 @import "core/root";
 @import "core/base";
+@import "core/icons";
+/*----------------------------------- COMPONENTS */
+@import "imports/swiper";
+/*----------------------------------- UI */
+@import "ui/button";
 /*----------------------------------- COMPONENTS */
 @import "components/main-layout";
+@import "components/start-preview";
+@import "components/soc-links";
 @import "components/cursor";
 @import "components/welcome";
 @import "components/projects";
@@ -20,5 +27,6 @@
 //@import "components/cases";
 @import "components/console";
 @import "components/themes";
-@import "components/available";
+//@import "components/available";
 @import "components/footer";
+@import "components/about-me";

@@ -1,0 +1,114 @@
+
+.button {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  height: var(--btn-hgt, rem(40));
+  min-width: var(--btn-min-wdh, rem(150));
+
+  padding: var(--btn-pdd, #{0 rem(30)});
+
+  color: $light;
+  font-size: var(--btn-font-size, rem(14));
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  border: rem(2) solid currentColor;
+  background: transparent;
+
+  outline: none;
+  user-select: none;
+
+  &:focus,
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+
+    width: 100%;
+
+    content: "";
+
+    background-color: $light;
+
+    transform: scaleX(0);
+    transform-origin: 100% 50%;
+
+    transition: border-color .3s, transform .34s;
+    transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+
+    will-change: transform, background-color;
+  }
+}
+
+@include only-mouse {
+  .button {
+    &:hover {
+      color: $primary;
+
+      border-color: $light !important;
+
+      &:before {
+        transform: scaleX(1);
+        transform-origin: 0 50%;
+        transition-timing-function: ease;
+      }
+    }
+  }
+}
+
+
+/*
+
+.button {
+  display: inline-flex;
+
+  width: max-content;
+  padding: rem(10) rem(16);
+
+  color: $dark;
+  line-height: 1;
+  font-size: rem(16);
+
+  border: none;
+  outline: none;
+  border-radius: rem(3);
+  background: $secondary;
+  box-shadow: rem(3) rem(3) rem(10) rem(-3) rgba(0, 0, 0, 0.26);
+
+  transition: background-color .3s linear;
+
+  &.--cl-dark {
+    color: $primary-dark;
+  }
+
+  &.--small {
+    padding: rem(6) rem(10);
+  }
+
+  &.--large {
+    padding: rem(24) rem(32);
+
+    font-size: rem(24);
+  }
+
+  @include only-mouse {
+    &:hover {
+      color: $light;
+      background-color: $secondary-dark !important;
+    }
+  }
+}
+*/

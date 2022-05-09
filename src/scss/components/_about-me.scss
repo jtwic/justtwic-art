@@ -1,0 +1,17 @@
+.about-me {
+
+  &__head {
+    @extend %sticky-block;
+
+    position: relative;
+    //z-index: 1;
+
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  &__capt {
+    @extend %section-caption;
+  }
+}

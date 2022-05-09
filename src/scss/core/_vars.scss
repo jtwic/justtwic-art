@@ -22,6 +22,10 @@ $contentGutterX2: rem(24) !default;
 $contentGutterX3: rem(48) !default;
 $contentGutterX4: rem(96) !default;
 
+$radiusSmall: rem(6);
+$radius: rem(10);
+$radiusLarge: rem(16);
+
 $themes-map: (
   default:(
     primary: #ff5656,
@@ -131,6 +135,50 @@ $base-font-size-color: 16px !default;
 
 $font-family-primary: 'Montserrat', sans-serif;
 
+//* Icons
+$font-path: '../../dist/fonts' !default;
+
+$icon-font-family: "justttwic-fonts" !default;
+$icon-font-prefix: 'jti-';
+$icon-font-path: $font-path + '/#{$icon-font-family}' !default;
+
+$jti-arrow-down: "\e900";
+$jti-arrow-left: "\e901";
+$jti-arrow-right: "\e902";
+$jti-arrow-up: "\e903";
+$jti-soc-behance: "\e904";
+$jti-soc-facebook: "\e905";
+$jti-soc-githab: "\e906";
+$jti-soc-gitlab: "\e907";
+$jti-soc-linkedIn: "\e908";
+$jti-soc-skype: "\e909";
+$jti-soc-telegram: "\e90a";
+$jti-soc-up-work: "\e90b";
+$jti-temples-bold-invert: "\e90c";
+$jti-temples-bold: "\e90d";
+$jti-temples-invert: "\e90e";
+$jti-temples: "\e90f";
+
+
+$icons-font-map: (
+  arrow-down : $jti-arrow-down,
+  arrow-left : $jti-arrow-left,
+  arrow-right : $jti-arrow-right,
+  arrow-up : $jti-arrow-up,
+  soc-behance : $jti-soc-behance,
+  soc-facebook : $jti-soc-facebook,
+  soc-githab : $jti-soc-githab,
+  soc-gitlab : $jti-soc-gitlab,
+  soc-linkedIn : $jti-soc-linkedIn,
+  soc-skype : $jti-soc-skype,
+  soc-telegram : $jti-soc-telegram,
+  soc-up-work : $jti-soc-up-work,
+  temples-bold-invert : $jti-temples-bold-invert,
+  temples-bold : $jti-temples-bold,
+  temples-invert : $jti-temples-invert,
+  temples : $jti-temples,
+);
+
 // * shadows
 $sh-card: 0 rem(-37) rem(80) rem(-20) $dark04;
 $sh-text: rem(0) rem(1) rem(0) $light;
@@ -148,4 +196,15 @@ $scroll-track-line: inset 0 0 0 0px $scroll-track-color;
 $cursor-size: rem(30);
 $cursor-color: $secondary;
 $cursor-color-active: $primary-dark;
+
+//* z-index
+$z-index-step: 10 !default;
+$z-index: (
+  start: 10,
+  middle: 50,
+  header: 100,
+  modal: 1000
+) !default;
+
+
 

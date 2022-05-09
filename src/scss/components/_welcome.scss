@@ -12,31 +12,47 @@
 
   &__capt {
     @extend %section-caption;
+
+    span{
+      color: $secondary;
+    }
+
+    div{
+      margin:  0 0 0 rem(16);
+      font-size: 0.6em;
+      opacity: 0.9;
+    }
   }
 
 
   &__text {
     position: relative;
 
-    max-width: rem(390);
+    max-width: rem(620);
 
-    padding:  0 $contentGutterX3;
+    margin: 0 $contentGutterX3;
 
     font-size: rem(18);
-    line-height: 1.44;
-    letter-spacing: rem(-1);
+    line-height: 1.34;
+    letter-spacing: rem(2);
     color: $light;
+    text-transform: uppercase;
+
+    opacity: 0.8;
 
     &:before {
       position: absolute;
-      bottom: 0%;
+      bottom: -30%;
       left: rem(-10);
 
-      width: 30%;
+      width: 10%;
+      height: rem(4);
 
       content: '';
 
-      border-bottom: rem(4) solid $light;
+      border-radius: rem(8);
+      background: $light;
+
     }
   }
 }

@@ -5,73 +5,25 @@
 <body>
 <main class="layout">
   <section class="layout__main">
-    <picture class="layout__img">
-      <img src="assets/images/about-img.jpg" alt="">
-
-      <!--      <mark class="layout__img-link" href="">history</mark>-->
-      <!--      <a class="layout__img-link" href=""></a>-->
-      <!--      <a class="layout__img-link" href=""></a>-->
-    </picture>
-
-    <div class="layout__capts">
-      <h1 class="caption gm-drop-shadow">Pashchuk Ilya</h1>
-
-      <h2 class="caption --2 gm-m-t gm-drop-shadow">
-<!--        Top Rated <br>-->
-        Expert Web Developer</h2>
-    </div>
-
-    <div class="layout__desc">
-      <p class="gm-drop-shadow">
-        My over 8 years of experience is focused on developing high quality and responsive interfaces, regardless of
-        framework or technology.
-      </p>
-
-      <div class="get gm-m-y">
-        <button class="button ">Get In Touch</button>
-
-        <div class="get__win">
-          <a href="mailto:illyadeveloper@gmail.com" target="_blank">illyadeveloper@gmail.com</a>
-          <a href="tel:+380933850675" target="_blank">+38 (093) 38 50 675</a>
-          <a href="https://telegram.me/justtwic" target="_blank">telegram: @justtwic</a>
-          <a href="skype:x-developmaster-x?chat" target="_blank">skype: x-developmaster-x</a>
-          <a class="button --small" href="https://www.upwork.com/workwith/justtwic" target="_blank">Quick offer</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="layout__links gm-drop-shadow">
-      <a class="layout__link --soc" href="https://www.upwork.com/freelancers/~01a55c9104e7bb7210"
-         target="_blank">upwork</a>
-      <a class="layout__link --soc" href="https://www.behance.net/ilyadeveloper" target="_blank">behance</a>
-      <a class="layout__link --soc"
-         href="https://www.linkedin.com/in/%D0%BF%D0%B0%D1%89%D1%83%D0%BA-%D0%B8%D0%BB%D1%8C%D1%8F-twic/"
-         target="_blank">linkedin</a>
-      <a class="layout__link --soc" href="https://career.habr.com/illyadeveloper" target="_blank">habr</a>
-      <a class="layout__link --soc" href="https://github.com/IlyaDeveloper" target="_blank">github</a>
-      <a class="layout__link --soc" href="https://gitlab.com/illyadeveloper " target="_blank">gitlab</a>
-    </div>
+    <include src="html/components/start-preview.html"></include>
   </section>
-  <section class="layout__right">
+
+  <section class="layout__content">
     <include src="html/components/welcome.html"></include>
     <include src="html/components/projects.html"></include>
+    <include src="html/components/about-me.html"></include>
+    <include src="html/components/skills.html"></include>
     <include src="html/components/reviews.html"></include>
     <include src="html/components/lets-talk.html"></include>
   </section>
-
-
-<!--    <aside class="layout__asides">-->
-<!--      <include src="html/components/skills.html"></include>-->
-
-<!--      <include src="html/components/cases.html"></include>-->
-<!--    </aside>-->
 </main>
 
 <!--<footer class="footer">-->
 <!--  ©justtwic.art 2022. All Rights Reserved.-->
 <!--</footer>-->
+<include src="html/components/soc-links.html"></include>
 
-<!--<include src="html/components/console.html"></include>-->
+<include src="html/components/console.html"></include>
 <!--<include src="html/components/themes.html"></include>-->
 <!--<include src="html/components/available.html"></include>-->
 

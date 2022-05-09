@@ -1,0 +1,96 @@
+.start-preview{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  max-width: rem(880);
+  //width: 100%;
+  //height: 100vh;
+
+  margin: auto;
+  padding: calc(#{$contentGutterX3} + 1.5vw) $contentGutterX3 $contentGutterX3;
+
+  text-align: center;
+
+  overflow: hidden;
+
+  transition: height 1.5s linear, 1s 0.5s linear;
+  transition-property: filter, opacity;
+
+  &__img, &__capt, &__desc, button, a {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__img {
+    display: inline-flex;
+    place-content: center center;
+
+    width: em(280);
+    height: em(280);
+    min-height: em(280);
+
+    margin-bottom: $contentGutterX3;
+
+    font-size: .85vw;
+
+    border-radius: 50%;
+    background-color: $primary;
+    transition: width .2s ease-out, height .2s ease-out;
+    overflow: hidden;
+
+    filter: blur(rem(50));
+
+    animation: pic-shadow 1s 2s forwards cubic-bezier(0, 6.48, .5, 1.54),
+    pic-blur 1s 1.9s both cubic-bezier(0, 1.08, .84, 1.13);
+
+    //side-left 1s both cubic-bezier(0, 1.08, .84, 1.13),
+
+    img {
+      object-fit: contain;
+
+      filter: blur(50px);
+      animation: pic-blur $transition-start-delay $transition-start-duration both cubic-bezier(0, 1.08, .84, 1.13);
+    }
+  }
+
+  &__capt {
+    display: inline-grid;
+    justify-content: center;
+
+    animation: show-block ($transition-start-delay + 0.63) ($transition-start-duration + 0.63) both linear;
+  }
+
+  &__desc {
+    z-index: 2;
+
+    display: inline-flex;
+    flex-flow: row;
+
+    margin-bottom: rem(24);
+
+    font-size: rem(20);
+    line-height: 1.44;
+
+    animation: show-block ($transition-start-delay + 1.33) ($transition-start-duration + 1.33) both linear;
+  }
+
+
+  @include max-wide(desktop) {
+    &__img {
+      font-size: 1vw;
+    }
+  }
+
+  @include max-wide(laptop) {
+    &__img {
+      font-size: 1.5vw;
+    }
+  }
+
+  @media (max-width: 680px) {
+    &__img {
+      font-size: 2.1vw;
+    }
+  }
+}

@@ -4,11 +4,13 @@
   right: 0;
   bottom: 0;
 
-  height: 100%;
-  width: 100%;
+  //height: 100%;
+  //width: 100%;
 
   background: $light;
-  overflow: auto;
+  //overflow: auto;
+
+  @include scroll-disappear;
 
   transition: 3s linear;
   //transition-property:  width, height;
@@ -117,11 +119,12 @@
 
       box-shadow: var(--case-picture-shadow, none);
 
-      perspective-origin: 0 0;
 
+      perspective: 100px;
+      perspective-origin: 0 0;
       //transform-style: preserve-3d;
       transition: transform 1s linear, box-shadow .6s linear;
-      perspective: 100px;
+
     }
 
     img {

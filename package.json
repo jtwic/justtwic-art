@@ -24,21 +24,22 @@
     "build2": "parcel build index.html -d ./dist --no-minify"
   },
   "devDependencies": {
-    "@parcel/resolver-glob": "^2.1.1",
+    "@parcel/resolver-glob": "^2.5.0",
     "@parcel/transformer-image": "^2.1.1",
-    "@parcel/transformer-sass": "^2.1.1",
-    "autoprefixer": "^10.4.2",
+    "@parcel/transformer-sass": "^2.5.0",
+    "autoprefixer": "^10.4.5",
     "cross-env": "^7.0.3",
-    "parcel": "latest",
+    "parcel": "^2.5.0",
     "parcel-plugin-static-files-copy": "^2.6.0",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.12",
     "posthtml-img-autosize": "^0.1.6",
-    "posthtml-include": "^1.7.2",
-    "posthtml-modules": "^0.8.0",
-    "sass": "^1.46.0"
+    "posthtml-include": "^1.7.3",
+    "posthtml-modules": "^0.8.1",
+    "sass": "^1.51.0",
+    "swiper": "^8.1.4"
   },
   "dependencies": {
-    "cssnano": "^5.0.15",
+    "cssnano": "^5.1.7",
     "scss": "^0.2.4"
   }
 }

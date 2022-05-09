@@ -1,27 +1,32 @@
 <div class="lets-talk">
-  <div class="lets-talk__head">
-    <div class="lets-talk__capt">
-
-      Hello, <br>LET’S TALK
-    </div>
-  </div>
-
   <div class="lets-talk__content">
+    <header class="lets-talk__head">
+      ENOUGH SMALL TALK. <br>
+      LET’S GET TO WORK
+      <br>
+      <small>Describe your idea. The more details the better. </small>
+    </header>
+
     <form action="sent_full.php">
       <div class="input">
-        <input class="input__field" type="name" placeholder="What's your name">
+        <input class="input__field" type="name" placeholder="What's your name" tabindex="1">
       </div>
 
       <div class="input">
-        <input class="input__field" type="email" placeholder="Contact me back at email">
+        <input class="input__field" type="email" placeholder="Your email">
       </div>
 
       <div class="textarea">
-        <textarea class="textarea__field" type="text" placeholder="I’d like to discuss"></textarea>
+        <textarea class="textarea__field" type="text" placeholder="Tell us about your project"></textarea>
       </div>
 
-
-      <button type="submit" class="lets-talk__btn">Hire me</button>
+      <button type="submit" class="lets-talk__sent button">Get in touch</button>
     </form>
   </div>
+
+  <button class="lets-talk__btn">
+    <span>LET’S TALK</span>
+
+    <i class="jti-arrow-down"></i>
+  </button>
 </div>

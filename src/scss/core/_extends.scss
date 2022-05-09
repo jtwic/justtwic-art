@@ -105,12 +105,12 @@
   width: 100%;
   min-height: rem(48);
 
-  padding: rem(24);
+  padding: rem(8) $contentGutter;
 
   border: unset;
 
   font-family: $font-family-primary;
-  font-size: rem(18);
+  font-size: rem(14);
   letter-spacing: rem(1);
   color: $light;
 
@@ -123,12 +123,13 @@
   }
 
   @include placeholder {
-    color: $dark04;
+    color: inherit;
+    opacity: 0.6;
   }
 }
 
 %section-caption {
-  font-size: 6vw;
+  font-size: rem(80); //4vw;
   line-height: 1;
   font-weight: 800;
 }

@@ -1,4 +1,7 @@
 import {PROJECTS_STORE} from "./cases.store";
+// import Swiper from '../../node_modules/swiper/swiper-bundle.esm';
+
+import Swiper from 'swiper';
 
 const CONFIG_PARTICLES = {
   "particles": {
@@ -750,16 +753,16 @@ const consoleAnimationInit = () => {
 }
 
 const initConsole = () => {
-  if (window.innerWidth <= 960) {
-    return
-  }
+  // if (window.innerWidth <= 960) {
+  //   return
+  // }
 
   cmd.help();
 
-  setTimeout(() => {
-    consoleWin.classList.remove('--hide');
-    consoleFixedPosition();
-  }, 1300);
+  // setTimeout(() => {
+  //   consoleWin.classList.remove('--hide');
+  //   consoleFixedPosition();
+  // }, 1300);
 
   consoleInput.addEventListener('keydown', (event) => {
     let val = consoleInput.value;
@@ -794,7 +797,7 @@ const initConsole = () => {
 
   consoleBtnDestroy.addEventListener('click', () => {
     setTimeout(() => {
-      consoleWin.remove();
+      consoleWin.classList.add('--hide');
     }, 1300);
   });
 
@@ -880,23 +883,94 @@ const initThemes = () => {
   });
 }
 
-const initFullProjects = ()=> {
+const initFullProjects = () => {
   let btnFull = document.querySelector('.button-resize');
   let projects = document.querySelector('.projects');
 
-  btnFull.addEventListener('click', ()=>{
+  btnFull.addEventListener('click', () => {
     console.log('btnFull', btnFull);
     btnFull.classList.toggle('--unfull');
     projects.classList.toggle('--full');
   });
 }
 
+
+const openConsole = () => {
+  consoleWin.classList.remove('--hide');
+  // consoleFixedPosition();
+}
+
+// const simpleMode = document.querySelector('#simpleMode');
+const layoutMain = document.querySelector('.layout__main');
+const letsContinue = document.querySelector('#letsContinue');
+
+// simpleMode.addEventListener('click', () => {
+//   openConsole()
+// })
+
+letsContinue.addEventListener('click', () => {
+  layoutMain.classList.add('--hide');
+  openConsole();
+  consoleFixedPosition();
+  console.log('ss')
+})
+
+const onScrollSocLinks = () => {
+  const socLinks = document.querySelector('.soc-links');
+}
+
+
+const letsTalkInit = () => {
+  const block = document.querySelector('.lets-talk');
+  const content = document.querySelector('.lets-talk__content');
+  const btn = document.querySelector('.lets-talk__btn');
+
+
+  btn.addEventListener('click', () => {
+    content.classList.toggle('--open');
+    btn.classList.toggle('--open');
+  });
+}
+
+
+
 window.addEventListener('DOMContentLoaded', () => {
-  // initParticles();
+  initParticles();
   initFullProjects(); // appendCasesLinks();
   // initChangeCursor();
   // initConsole();
   // initThemes();
+  letsTalkInit();
 });
 
 
+const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  // direction: 'vertical',
+  loop: true,
+  // autoplay:true,
+  delay: 3000,
+  pauseOnMouseEnter: true,
+  freeMode: true,
+  parallax: true,
+
+  slidesPerView: 3,
+  spaceBetween: 30,
+
+
+  // If we need pagination
+  pagination: {
+    // el: '.swiper-pagination',
+  },
+
+  // Navigation arrows
+  navigation: {
+    // nextEl: '.swiper-button-next',
+    // prevEl: '.swiper-button-prev',
+  },
+
+  // And if we need scrollbar
+  scrollbar: {
+    // el: '.swiper-scrollbar',
+  },
+});
