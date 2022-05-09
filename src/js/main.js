@@ -896,7 +896,7 @@ const initFullProjects = () => {
 
 
 const openConsole = () => {
-  consoleWin.classList.remove('--hide');
+  // consoleWin.classList.remove('--hide');
   // consoleFixedPosition();
 }
 

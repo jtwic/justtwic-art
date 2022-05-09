@@ -1,10 +1,14 @@
 .about-me {
+  display: flex;
+  align-items: center;
+  
+  min-height: 88vh;
 
   &__head {
     @extend %sticky-block;
+    @extend %section-caption;
 
     position: relative;
-    //z-index: 1;
 
     display: flex;
     justify-content: space-between;
@@ -12,6 +16,45 @@
   }
 
   &__capt {
-    @extend %section-caption;
+
+  }
+
+  &__content {
+    display: grid;
+    grid-gap: $contentGutterX3;
+
+    max-width: rem(560);
+
+    padding: 0 $contentGutterX3;
+  }
+
+  &__features {
+    display: inline-flex;
+    align-items: baseline;
+    gap: $contentGutterX2;
+  }
+
+  &__item {
+    display: inline-flex;
+    flex-flow: column;
+
+    mark {
+      font-size: rem(46);
+      font-weight: 900;
+      text-shadow: rem(6) rem(0) rem(0) $dark04;
+      color: $secondary;
+      z-index: -1;
+    }
+
+    &:not(:first-child) {
+      margin-top: $contentGutterX2;
+    }
+  }
+
+  &__btns {
+    --btn-min-wdh: auto;
+
+    display: inline-flex;
+    gap: $contentGutter;
   }
 }

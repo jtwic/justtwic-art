@@ -10,15 +10,17 @@ $lets-talk-btn-size: rem(100);
   flex-flow: column;
   align-items: start;
 
-  min-height: rem(450);
+  //min-height: rem(450);
 
   &__content {
-    position: relative;
-    bottom: dv(-$lets-talk-btn-size, 2);
-    left: dv($lets-talk-btn-size, 2);
+    //position: relative;
+    //bottom: dv(-$lets-talk-btn-size, 2);
+    //left: dv($lets-talk-btn-size, 2);
 
     display: grid;
     align-items: center;
+
+    margin: 0 0 dv(-$lets-talk-btn-size, 2) dv($lets-talk-btn-size, 2);
 
     border-radius: $radiusSmall;
     background: $dark06;
@@ -31,6 +33,7 @@ $lets-talk-btn-size: rem(100);
     backdrop-filter: blur(rem(7));
 
     &.--open {
+      //max-height: unset;
       transform: none;
     }
 

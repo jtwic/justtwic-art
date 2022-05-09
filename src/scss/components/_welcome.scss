@@ -1,4 +1,6 @@
 .welcome {
+  position: relative;
+
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -13,15 +15,23 @@
   &__capt {
     @extend %section-caption;
 
-    span{
-      color: $secondary;
-    }
+    max-width: rem(900);
+    //
+    //span{
+    //  color: $secondary;
+    //}
+    //
+    //div{
+    //  margin:  0 0 0 rem(16);
+    //  font-size: 0.6em;
+    //  opacity: 0.9;
+    //}
+  }
 
-    div{
-      margin:  0 0 0 rem(16);
-      font-size: 0.6em;
-      opacity: 0.9;
-    }
+  &__right{
+    position: absolute;
+    top:50%;
+    right: 50%;
   }
 
 
