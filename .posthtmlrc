@@ -1,10 +1,31 @@
 {
   "plugins": {
     "posthtml-include": {
-      "root": "src"
+      "root": "src/html/includes",
+      "locals": {}
     },
     "posthtml-modules": {
-      "root": "./src"
+      "root": "src/html/includes"
+    },
+    "posthtml-expressions": {
+      "locals": {
+        "lang": "en-US",
+        "langUrl": "https://justtwic.art/",
+        "langUrlAlternative": "https://justtwic.art/",
+        "meta": {
+          "color": "#000",
+          "title": "justtwic - Frontend Engineer",
+          "description": "Front-End Engineer with extensive expertise in building intuitive, user-focused, and scalable interfaces for web and mobile platforms. Skilled in modern technologies like Vue.js, Angular, and responsive design principles.",
+          "keywords": "Front-End Engineer, UX/UI Design, Responsive Interfaces, Web Development, Mobile Development, Vue.js, Angular, HTML5, CSS3, Nuxt.js, UI Development",
+          "creator": "Pashchuk Illya",
+          "siteName": "justtwic.art",
+          "link": "https://justtwic.art/"
+        },
+        "gTag": true,
+        "gTagKey": "",
+        "headerClassName": "",
+        "cssFile": "style",
+      }
     },
     "posthtml-img-autosize": {
       "root": "src/assets/images"

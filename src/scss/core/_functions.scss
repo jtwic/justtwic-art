@@ -1,4 +1,13 @@
-@use 'sass:math';
+@use "sass:math";
+@use "sass:map";
+
+$positionIndexs: (
+  start: 10,
+  middle: 50,
+  header: 100,
+  modal: 1000
+) !default;
+
 
 // Function for convert to em & rem
 $baseFontSize: 16;
@@ -10,11 +19,11 @@ $baseFontSize: 16;
 
 //to rem
 @function rem($pixels, $context: $baseFontSize) {
-  @if (unitless($pixels)) {
+  @if (math.is-unitless($pixels)) {
     $pixels: $pixels * 1px;
   }
 
-  @if (unitless($context)) {
+  @if (math.is-unitless($context)) {
     $context: $context * 1px;
   }
 
@@ -23,11 +32,11 @@ $baseFontSize: 16;
 
 //to em
 @function em($pixels, $context: $baseFontSize) {
-  @if (unitless($pixels)) {
+  @if (math.is-unitless($pixels)) {
     $pixels: $pixels * 1px;
   }
 
-  @if (unitless($context)) {
+  @if (math.is-unitless($context)) {
     $context: $context * 1px;
   }
 
@@ -43,7 +52,7 @@ $baseFontSize: 16;
 }
 
 @function z-index($key) {
-  @return map-get($z-index, $key);
+  @return map-get($positionIndexs, $key);
 }
 
 /// Replace `$search` with `$replace` in `$string`
@@ -67,7 +76,6 @@ $baseFontSize: 16;
   @return map-get($wideScreens, $key);
 }
 
-
 @function get-value($n) {
   @return $n / ($n * 0 + 1);
 }
@@ -76,13 +84,6 @@ $baseFontSize: 16;
 @function get-line-height($font-size, $line-height) {
   @return get-value($line-height / $font-size);
 }
-
-/*
-.foo {
-  font-size: 26px;
-  line-height: get-line-height(26px, 32px); //1.23077
-}
-*/
 
 @function random-range($min, $max) {
   $rand: random();

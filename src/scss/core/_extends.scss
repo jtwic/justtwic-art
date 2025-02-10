@@ -1,3 +1,6 @@
+@use "functions" as *;
+@use "mixins" as *;
+@use "vars" as *;
 
 %block {
   display: flex;
@@ -24,9 +27,9 @@
   overflow-x: hidden;
 
   transition: width .8s linear, padding-right 1s linear,
-  opacity 1s linear,
-  visibility 1.3s linear,
-  max-width 2.5s 0.1s linear;
+    opacity 1s linear,
+    visibility 1.3s linear,
+    max-width 2.5s 0.1s linear;
 
   @extend %scroll-small;
 
@@ -45,7 +48,7 @@
     max-width: 100vw;
     width: var(--content-width, 36vw);
 
-    & ~ .caption {
+    &~.caption {
       --caption-mark-opacyty: 0.6;
 
       &:before {
@@ -88,3 +91,12 @@
   box-shadow: 0 0 1.5rem 0.5rem rgba(0, 0, 0, 0.46);
   overflow: hidden;
 }
+
+
+%scroll-small {
+  @include scroll-small();
+}
+
+//%scroll-small-offset {
+//  @include scroll-offset($scroll-size);
+//}

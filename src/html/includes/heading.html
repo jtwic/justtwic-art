@@ -1,0 +1,58 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta http-equiv="content-language" content={{lang}}>
+  <meta name="content-language" content="fr-CA">
+
+  <meta name="theme-color" content={{metaColor}}>
+  <base href="/">
+
+  <if condition="metaIndexation">
+    <meta name="robots" content="index, follow, max-image-preview:standard">
+  </if>
+  <else>
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="googlebot" content="noindex,nofollow">
+    <meta name="googlebot-news" content="noindex,nofollow">
+  </else>
+
+  <!-- SEO meta descriptions variables-->
+  <title lang-meta-key="meta_title" >{{metaTitle}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" lang-meta-key="meta_descroption" content={{metaDescription}}>
+  <meta name="keywords" lang-meta-key="meta_keywords" content={{metaKeywords}}>
+  <meta name="author" content={{metaCreator}}>
+
+  <meta itemprop="name" content={{metaSiteName}}>
+  <meta itemprop="description" lang-meta-key="meta_descroption" content={{metaDescription}}>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" lang-meta-key="meta_title" content={{metaTitle}}>
+  <meta name="twitter:description" lang-meta-key="meta_descroption" content={{metaDescription}}>
+  <meta name="twitter:creator" content={{metaCreator}}>
+  <meta name="twitter:site" content={{metaLink}}>
+  <meta name="twitter:image" content="{{metaLink}}/cover.jpg">
+  <meta name="twitter:image:alt" lang-meta-key="meta_title" content={{metaTitle}}>
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" lang-meta-key="meta_title" content={{metaTitle}}>
+  <meta property="og:description" lang-meta-key="meta_descroption" content={{metaDescription}}>
+  <meta property="og:site_name" content={{metaSiteName}}>
+  <meta property="og:image:alt" content={{metaSiteName}}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content={{metaLink}}>
+  <meta property="og:image" content="{{metaLink}}/cover.jpg">
+
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicon/apple-touch-icon.png"> -->
+  <!-- <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicon/favicon-16x16.png">
+  <link rel="shortcut icon" href="../../assets/img/favicon/favicon.ico" type="image/x-icon"> -->
+
+  <link rel="canonical" href="{{metaCanonical}}">
+  <link rel="alternate" href="{{metaCanonical}}#en" hreflang="en-US">
+  <link rel="alternate" href="{{metaCanonical}}" hreflang="fr-CA">
+
+  <link rel="preload" href="../../scss/{{cssFile}}.scss" as="style" />
+  <link rel="stylesheet" href="../../scss/{{cssFile}}.scss">
+</head>

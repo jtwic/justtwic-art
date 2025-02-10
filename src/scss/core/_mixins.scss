@@ -1,3 +1,7 @@
+@use "sass:math";
+@use "sass:map";
+@use "vars" as *;
+
 @mixin clearfix {
   &::after {
     content: '';
@@ -34,21 +38,37 @@
 
 // Universal breakpoints mixins
 @mixin min-wide($size) {
-  @if (map-has-key($wideScreens, $size)) {
-    @media (min-width: map-get($wideScreens, $size)) {
+  @if (map.has-key($wideScreens, $size)) {
+    @media (min-width: map.get($wideScreens, $size)) {
       @content;
     }
-  } @else {
+  }
+
+  @else {
     @warn "$size doesn't exist in $wideScreens.";
   }
 }
 
 @mixin max-wide($size) {
-  @if (map-has-key($wideScreens, $size)) {
-    @media (max-width: map-get($wideScreens, $size) - 1) {
+  @if (map.has-key($wideScreens, $size)) {
+    @media (max-width: map.get($wideScreens, $size) - 1) {
       @content;
     }
-  } @else {
+  }
+
+  @else {
+    @warn "$size doesn't exist in $wideScreens.";
+  }
+}
+
+@mixin min-max-wide($size, $size2) {
+  @if (map.has-key($wideScreens, $size) & map.has-key($wideScreens, $size2)) {
+    @media (min-width: map.get($wideScreens, $size)) and (max-width: map.get($wideScreens, $size2)) {
+      @content;
+    }
+  }
+
+  @else {
     @warn "$size doesn't exist in $wideScreens.";
   }
 }
@@ -63,12 +83,15 @@
   @-webkit-keyframes #{$name} {
     @content;
   }
+
   @-moz-keyframes #{$name} {
     @content;
   }
+
   @-ms-keyframes #{$name} {
     @content;
   }
+
   @keyframes #{$name} {
     @content;
   }
@@ -94,22 +117,23 @@
   text-shadow: $min-think 0 $color, 0 $thick $color, $thick 0 $color, 0 $min-think $color;
 }
 
-@function shadowBold($thick, $color) {
-  $min-think: -$thick;
-  @return $min-think 0 $color, 0 $thick $color, $thick 0 $color, 0 $min-think $color;
-}
-
 // Insert icon in pseudo element from icon-fonts
 @mixin pseudo-icon($icon-name, $size) {
-  content: unicode($icon-name);
+  //content: unicode($icon-name);
+  content: $icon-name;
+
   font: {
-    @if type-of($size) == 'number' and unitless($size) {
+    @if type-of($size)=='number' and math.is-unitless($size) {
       size: rem($size);
-    } @else {
+    }
+
+    @else {
       size: $size;
     }
+
     family: $icon-font-family;
   }
+
   line-height: 1;
 }
 
@@ -194,6 +218,7 @@
 }
 
 @mixin scroll-style($size, $foreground-color, $background-color: mix($foreground-color, white, 50%)) {
+
   // For Google Chrome
   ::-webkit-scrollbar {
     width: $size;
@@ -217,10 +242,11 @@
 
 @mixin scroll-offset($size) {
   padding-right: $size;
-  margin-right: -$size;
+  margin-right: calc(#{$size} * -1);
 }
 
 @mixin change-auto-fill {
+
   //@include optional-at-root(':-webkit-autofill') {
   //  @content;
   //}
@@ -261,6 +287,7 @@
     opacity: 0;
     transition: opacity $transTime;
   }
+
   &:hover {
     &:before {
       opacity: 1;
@@ -318,6 +345,7 @@
   @supports (-moz-appearance: none) {
     @content;
   }
+
   //
   //@-moz-document url-prefix() {
   //  @content;
@@ -379,7 +407,6 @@
 //  }
 //}
 
-
 @mixin insert-icons {
   [class*='#{$icon-font-prefix}'] {
     @content;
@@ -388,9 +415,9 @@
 
 @mixin content-scale($map) {
   @each $var in $map {
-    $direction: map-get($var, 'direction');
-    $wide: map-get($var, 'wide');
-    $scale: map-get($var, 'scale');
+    $direction: map.get($var, 'direction');
+    $wide: map.get($var, 'wide');
+    $scale: map.get($var, 'scale');
 
     @media ($direction: $wide) {
       font-size: $scale;
@@ -401,29 +428,29 @@
 $enable-important-utilities: true;
 
 @mixin generate-gm($utility, $infix) {
-  $values: map-get($utility, values);
+  $values: map.get($utility, values);
 
-  @if type-of($values) == 'string' or type-of(nth($values, 1)) != 'list' {
+  @if type-of($values)=='string' or type-of(nth($values, 1)) !='list' {
     $values: zip($values, $values);
   }
 
   @each $key, $value in $values {
-    $properties: map-get($utility, property);
+    $properties: map.get($utility, property);
 
-    @if type-of($properties) == 'string' {
+    @if type-of($properties)=='string' {
       $properties: append((), $properties);
     }
 
-    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
-    $property-class: if($property-class == null, '', $property-class);
+    $property-class: if(map.has-key($utility, class), map.get($utility, class), nth($properties, 1));
+    $property-class: if($property-class ==null, '', $property-class);
 
-    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+    $state: if(map.has-key($utility, state), map.get($utility, state), ());
 
-    $infix: if($property-class == '' and str-slice($infix, 1, 1) == '-', str-slice($infix, 2), $infix);
+    $infix: if($property-class =='' and str-slice($infix, 1, 1)=='-', str-slice($infix, 2), $infix);
 
-    $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
+    $property-class-modifier: if($key, if($property-class =='' and $infix =='', '', '-') + $key, '');
 
-    @if $value != null {
+    @if $value !=null {
       .#{$property-class + $infix + $property-class-modifier} {
         @each $property in $properties {
           #{$property}: $value if($enable-important-utilities, !important, null);
@@ -459,7 +486,7 @@ $enable-important-utilities: true;
 
 //@each $key, $utility in $global-modificators-map {
 //  @include generate-gm($utility, '');
-//  //@if type-of($utility) == "map" and map-get($utility, rfs) and (map-get($utility, responsive) or $infix == "") {
+//  //@if type-of($utility) == "map" and map.get($utility, rfs) and (map.get($utility, responsive) or $infix == "") {
 //  //
 //  //}
 //}
@@ -478,18 +505,93 @@ $enable-important-utilities: true;
 }
 
 @mixin generate-themes($map) {
+
   // primary colors
   @each $theme-name, $theme-values in $map {
-    @if $theme-name == 'default' {
+    @if $theme-name =='default' {
       @each $color, $value in $theme-values {
         @include set-prefix('cl', $color, $value)
       }
-    } @else {
+    }
+
+    @else {
       @include use-theme-name($theme-name) {
         @each $color, $value in $theme-values {
           @include set-prefix('cl', $color, $value)
         }
       }
     }
+  }
+}
+
+@mixin font-face($font-name,
+  $local-name,
+  $font-path,
+  $font-file,
+  $font-weight: 400,
+  $font-style: normal,
+  $support-required: 'modern'
+
+) {
+
+  @font-face {
+    font-family: $font-name;
+    font-style: $font-style;
+    font-weight: $font-weight;
+    font-display: swap;
+
+    @if $support-required=='oldie' {
+      src: url('#{$font-path}.eot');
+      src: url('#{$font-path}.eot?#iefix') format('embedded-opentype'),
+      url('#{$font-path}.woff2') format('woff2'),
+      url('#{$font-path}.woff') format('woff'),
+      url('#{$font-path}.ttf') format('truetype');
+    }
+
+    @if $support-required=='recent' {
+      src: url('#{$font-path}.woff2') format('woff2'),
+      url('#{$font-path}.woff') format('woff'),
+      url('#{$font-path}.ttf') format('truetype');
+    }
+
+    @if $support-required=='modern' {
+      src: font-local($local-name, $font-file),
+      url('#{$font-path + $font-file}.woff2') format('woff2'),
+      url('#{$font-path + $font-file}.woff') format('woff');
+    }
+  }
+
+  @if $support-required !='oldie' and $support-required !='recent' and $support-required !='modern' {
+    @error 'Invalid support-required value. Must be "oldie"==>IE8 and above/ Android native browser 4+/ Safari 4.3 OR "recent"==>IE9+/ Android native browser 4.0+/ Safari 4.3+ OR "modern"==>IE9+/ Android native browser 4.4+/ Safari 5.1+';
+  }
+}
+
+@mixin scroll-small {
+  scrollbar-width: thin;
+  scrollbar-color: $scroll-thumb-color $scroll-track-color;
+  scrollbar-face-color: $scroll-thumb-color;
+  scrollbar-track-color: $scroll-track-color;
+
+  &::-webkit-scrollbar {
+    width: $scroll-size;
+    height: $scroll-size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: $scroll-border-radius;
+    background: $scroll-thumb-color;
+
+    transition: background-color $transition-default;
+    box-shadow: $scroll-track-line;
+    will-change: background-color;
+
+    &:hover {
+      background-color: $scroll-thumb-hover-color;
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: $scroll-border-radius;
+    background: $scroll-track-color;
   }
 }

@@ -1,20 +1,17 @@
+/*----------------------------------- CORE */
+@use "core/reset";
+@use "core/fonts";
+@use "core/animations";
+@use "core/gm";
+@use "core/root";
+@use "core/base";
+
 /*----------------------------------- COMPONENTS */
-@import "core/functions";
-@import "core/mixins";
-@import "core/vars";
-@import "core/scrolls";
-@import "core/fonts";
-@import "core/extends";
-@import "core/animations";
-@import "core/gm";
-@import "core/root";
-@import "core/base";
-/*----------------------------------- COMPONENTS */
-@import "components/main-layout";
-@import "components/cursor";
-@import "components/skills";
-@import "components/cases";
-@import "components/console";
-@import "components/themes";
-@import "components/available";
-@import "components/footer";
+@use "components/main-layout";
+@use "components/cursor";
+@use "components/skills";
+@use "components/cases";
+@use "components/console";
+@use "components/themes";
+@use "components/available";
+@use "components/footer";

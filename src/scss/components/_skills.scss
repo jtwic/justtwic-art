@@ -1,3 +1,5 @@
+@use "stl-core" as *;
+
 .skills {
   @extend %block;
 
@@ -74,19 +76,19 @@
         //animation: animate-stripes 5s linear infinite;
       }
 
-      &::-webkit-progress-value:after {
-        /* Only webkit/blink browsers understand pseudo elements on pseudo classes. A rare phenomenon! */
-        content: '';
-        position: absolute;
-
-        width: 5px;
-        height: 5px;
-        top: 7px;
-        right: 7px;
-
-        background-color: white;
-        border-radius: 100%;
-      }
+//       &::-webkit-progress-value:after {
+//         /* Only webkit/blink browsers understand pseudo elements on pseudo classes. A rare phenomenon! */
+//         content: '';
+//         position: absolute;
+//
+//         width: 5px;
+//         height: 5px;
+//         top: 7px;
+//         right: 7px;
+//
+//         background-color: white;
+//         border-radius: 100%;
+//       }
 
       &::-moz-progress-bar {
         /* Gradient background with Stripes */

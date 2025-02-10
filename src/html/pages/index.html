@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xml:lang={{lang}} lang={{lang}} loading="true" theme="github" prefix="og: http://ogp.me/ns#">
+<include src="heading.html" locals='{ "lang": "{{lang}}",
+                   "metaColor" : "{{meta.color}}",
+                   "metaTitle" : "{{meta.title}}",
+                   "metaDescription" : "{{meta.description}}",
+                   "metaKeywords" : "{{meta.keywords}}",
+                   "metaCreator" : "{{meta.creator}}",
+                   "metaSiteName" : "{{meta.siteName}}",
+                   "metaLink" : "{{meta.link}}",
+                   "metaCanonical": "{{meta.link}}",
+                   "metaIndexation": true,
+                   "cssFile": "{{cssFile}}" }'>
+</include>
+
+<body>
+  <include src="components/header.html"></include>
+
+  <main class="layout">
+    <section class="layout__main">
+      <picture class="layout__img">
+        <!-- <img src="../assets/images/about-img.jpg" alt=""> -->
+
+        <!--      <mark class="layout__img-link" href="">history</mark>-->
+        <!--      <a class="layout__img-link" href=""></a>-->
+        <!--      <a class="layout__img-link" href=""></a>-->
+      </picture>
+
+      <div class="layout__capts">
+        <h1 class="caption gm-drop-shadow">Pashchuk Ilya</h1>
+
+        <h2 class="caption --2 gm-m-t gm-drop-shadow">Top Rated <br>UI/UX/Front-end Engineer</h2>
+      </div>
+
+      <div class="layout__desc">
+        <p class="gm-drop-shadow">
+          My over 8 years of experience is focused on developing high quality and responsive interfaces, regardless of
+          framework or technology.
+        </p>
+
+        <div class="get gm-m-y">
+          <button class="button ">Get In Touch</button>
+
+          <div class="get__win">
+            <a href="mailto:illyadeveloper@gmail.com" target="_blank">illyadeveloper@gmail.com</a>
+            <a href="tel:+380933850675" target="_blank">+38 (093) 38 50 675</a>
+            <a href="https://telegram.me/justtwic" target="_blank">telegram: @justtwic</a>
+            <a href="skype:x-developmaster-x?chat" target="_blank">skype: x-developmaster-x</a>
+            <a class="button --small" href="https://www.upwork.com/workwith/justtwic" target="_blank">Quickstarter
+              offer</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="layout__links gm-drop-shadow">
+        <a class="layout__link --soc" href="https://www.upwork.com/justtwic" target="_blank">upwork</a>
+        <a class="layout__link --soc" href="https://www.behance.net/justtwic" target="_blank">behance</a>
+        <a class="layout__link --soc" href="https://www.linkedin.com/in/justtwic" target="_blank">linkedin</a>
+        <a class="layout__link --soc" href="https://github.com/jtwic" target="_blank">github</a>
+        <a class="layout__link --soc" href="https://gitlab.com/justtwic " target="_blank">gitlab</a>
+      </div>
+    </section>
+
+    <aside class="layout__asides">
+      <include src="components/skills.html"></include>
+
+      <include src="components/cases.html"></include>
+    </aside>
+  </main>
+
+  <include src="components/console.html"></include>
+  <!--<include src="html/components/themes.html"></include>-->
+  <include src="components/available.html"></include>
+
+  <include src="components/footer.html"></include>
+
+  <!--<div id="cursor" class="cursor"></div>-->
+  <div id="canvas" class="canvas"></div>
+  <div id="canvas-circles" class="canvas --circle"></div>
+
+  <include src="scripts.html"></include>
+</body>
+
+</html>

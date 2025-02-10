@@ -1,0 +1,43 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@id": "{{meta.link}}/#website",
+    "@type": "WebSite",
+    "name": "{{meta.creator}}",
+    "url": "{{meta.link}}",
+    "sameAs": [
+      "https://facebook.com/gatdinc",
+      "http://instagram.com/gatdinc",
+      "https://linkedin.com/company/gatdinc"
+    ]
+  }
+</script>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@id": "{{meta.link}}#webpage",
+    "@type": "WebPage",
+    "name": "{{meta.creator}}",
+    "url": "{{meta.link}}"
+  }
+</script>
+
+<if condition="gTag">
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{gTagKey}}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', '{{gTagKey}}');
+  </script>
+</if>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@1.38.0/tsparticles.min.js"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+
+<!-- <script src="../../js/main.js" type="module"></script> -->

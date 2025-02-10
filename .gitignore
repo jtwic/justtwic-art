@@ -8,9 +8,14 @@
 # Only exists if Bazel was run
 /bazel-out
 .parcel-cache
+.firebase
+.cache
+.npmrc
+firebase-debug.log
 
 # dependencies
 /node_modules
+package-lock.json
 
 # profiling files
 chrome-profiler-events*.json
