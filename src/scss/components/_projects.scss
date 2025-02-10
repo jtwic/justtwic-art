@@ -102,7 +102,7 @@
 
   &__pic {
     position: relative;
-    //width: rem(300);
+
     display: flex;
 
     max-height: rem(600);
@@ -119,12 +119,10 @@
 
       box-shadow: var(--case-picture-shadow, none);
 
-
       perspective: 100px;
       perspective-origin: 0 0;
       //transform-style: preserve-3d;
       transition: transform 1s linear, box-shadow .6s linear;
-
     }
 
     img {

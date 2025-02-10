@@ -465,7 +465,7 @@ const initChangeCursor = () => {
 };
 
 const particles = (map, config) => {
-  return particlesJS(map, config);
+  // return particlesJS(map, config);
 };
 
 const initParticles = () => {
@@ -572,6 +572,9 @@ const cmd = {
     }
   },
   help: () => {
+    let str = 22;
+
+
     let html =
       'Welcome my friend 👋 is my simple console, you can perform:\n' +
       '<pre>  <b>last</b> - see my last completed project</pre>\n' +
