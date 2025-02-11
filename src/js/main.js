@@ -612,6 +612,17 @@ const appendCasesLinks = () => {
   casesHoverEvent();
 };
 
+const resetScroll = () => {
+  setTimeout(() => {
+    window.scrollTo(0, 0);
+    clearTimeout();
+  }, 0);
+}
+
+const updateYearOnElement = (element) => {
+  document.querySelector(element).innerHTML = new Date().getFullYear();
+};
+
 window.addEventListener('DOMContentLoaded', (revent) => {
   // new ParticlesServices().init();
 
@@ -619,4 +630,6 @@ window.addEventListener('DOMContentLoaded', (revent) => {
   appendCasesLinks();
   // initChangeCursor();
   initConsole();
+
+  updateYearOnElement('[data-actual-year]');
 });
