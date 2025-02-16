@@ -1,5 +1,7 @@
 @use "sass:math";
 @use "sass:map";
+@use "sass:selector";
+
 @use "vars" as *;
 
 @mixin clearfix {
@@ -123,7 +125,7 @@
   content: $icon-name;
 
   font: {
-    @if type-of($size)=='number' and math.is-unitless($size) {
+    @if type-of($size)=='number' and unitless($size) {
       size: rem($size);
     }
 
@@ -170,7 +172,7 @@
 }
 
 @mixin optional-at-root($sel) {
-  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+  @at-root #{if(not &, $sel, selector.append(&, $sel))} {
     @content;
   }
 }
@@ -567,8 +569,8 @@ $enable-important-utilities: true;
 }
 
 @mixin scroll-small {
-  scrollbar-width: thin;
-  scrollbar-color: $scroll-thumb-color $scroll-track-color;
+  // scrollbar-width: thin;
+  // scrollbar-color: $scroll-thumb-color $scroll-track-color;
   scrollbar-face-color: $scroll-thumb-color;
   scrollbar-track-color: $scroll-track-color;
 

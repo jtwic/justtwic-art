@@ -1,0 +1,23 @@
+.button {
+  position: relative;
+  z-index: 1;
+
+  display: var(--button-display, inline-flex);
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap, rem(16));
+
+  min-height: var(--button-height, rem(50));
+  padding: var(--button-gutter-y, rem(10)) var(--button-gutter-x, rem(24));
+
+  font-weight: $base-font-weight;
+  font-size: var(--button-size, rem(18));
+  color: var(--button-color, $light);
+  white-space: nowrap;
+
+  touch-action: none;
+  outline: unset;
+
+  border-radius: var(--button-radius, rem(4));
+  background: var(--button-fill, $dark);
+}
